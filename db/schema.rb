@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_162655) do
+ActiveRecord::Schema.define(version: 2023_05_17_163128) do
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -28,12 +28,27 @@ ActiveRecord::Schema.define(version: 2023_05_17_162655) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "events_players", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "team"
+    t.integer "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "title"
     t.date "release_date"
     t.text "description"
     t.string "image"
     t.string "publisher"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games_players", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

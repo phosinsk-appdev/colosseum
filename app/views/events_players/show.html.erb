@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Events player #<%= @the_events_player.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/events_players">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_events_player/<%= @the_events_player.id %>">
+          Delete events player
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_events_player.event_id %>
+      </dd>
+
+      <dt>
+        Team
+      </dt>
+      <dd>
+        <%= @the_events_player.team %>
+      </dd>
+
+      <dt>
+        Player
+      </dt>
+      <dd>
+        <%= @the_events_player.player_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_events_player.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_events_player.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit events player
+    </h2>
+
+    <form action="/modify_events_player/<%= @the_events_player.id %>"  method="post" >
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_events_player.event_id %>">
+      </div>
+
+      <div>
+        <label for="team_box">
+          Team
+        </label>
+
+        <input type="text" id="team_box" name="query_team" value="<%= @the_events_player.team %>">
+      </div>
+
+      <div>
+        <label for="player_id_box">
+          Player
+        </label>
+
+        <input type="text" id="player_id_box" name="query_player_id" value="<%= @the_events_player.player_id %>">
+      </div>
+
+      <button>
+        Update events player
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

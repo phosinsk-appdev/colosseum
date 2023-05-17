@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all games players
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new games player
+    </h2>
+
+    <form action="/insert_games_player" method="post">
+      <div>
+        <label for="player_id_box">
+          Player
+        </label>
+
+        <input type="text" id="player_id_box" name="query_player_id">
+      </div>
+
+      <div>
+        <label for="game_id_box">
+          Game
+        </label>
+
+        <input type="text" id="game_id_box" name="query_game_id">
+      </div>
+
+      <button>
+        Create games player
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Player
+        </th>
+
+        <th>
+          Game
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_games_players.each do |a_games_player| %>
+      <tr>
+        <td>
+          <%= a_games_player.id %>
+        </td>
+
+        <td>
+          <%= a_games_player.player_id %>
+        </td>
+
+        <td>
+          <%= a_games_player.game_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_games_player.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_games_player.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/games_players/<%= a_games_player.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -2,6 +2,44 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Games player resource:
+
+  # CREATE
+  post("/insert_games_player", { :controller => "games_players", :action => "create" })
+          
+  # READ
+  get("/games_players", { :controller => "games_players", :action => "index" })
+  
+  get("/games_players/:path_id", { :controller => "games_players", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_games_player/:path_id", { :controller => "games_players", :action => "update" })
+  
+  # DELETE
+  get("/delete_games_player/:path_id", { :controller => "games_players", :action => "destroy" })
+
+  #------------------------------
+
+  # Routes for the Events player resource:
+
+  # CREATE
+  post("/insert_events_player", { :controller => "events_players", :action => "create" })
+          
+  # READ
+  get("/events_players", { :controller => "events_players", :action => "index" })
+  
+  get("/events_players/:path_id", { :controller => "events_players", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_events_player/:path_id", { :controller => "events_players", :action => "update" })
+  
+  # DELETE
+  get("/delete_events_player/:path_id", { :controller => "events_players", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Player resource:
 
   # CREATE
