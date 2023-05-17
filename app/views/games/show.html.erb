@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Game #<%= @the_game.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/games">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_game/<%= @the_game.id %>">
+          Delete game
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_game.title %>
+      </dd>
+
+      <dt>
+        Release date
+      </dt>
+      <dd>
+        <%= @the_game.release_date %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_game.description %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @the_game.image %>
+      </dd>
+
+      <dt>
+        Publisher
+      </dt>
+      <dd>
+        <%= @the_game.publisher %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_game.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_game.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit game
+    </h2>
+
+    <form action="/modify_game/<%= @the_game.id %>"  method="post" >
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_game.title %>">
+      </div>
+
+      <div>
+        <label for="release_date_box">
+          Release date
+        </label>
+
+        <input type="date" id="release_date_box" name="query_release_date" value="<%= @the_game.release_date %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_game.description %></textarea>
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" value="<%= @the_game.image %>">
+      </div>
+
+      <div>
+        <label for="publisher_box">
+          Publisher
+        </label>
+
+        <input type="text" id="publisher_box" name="query_publisher" value="<%= @the_game.publisher %>">
+      </div>
+
+      <button>
+        Update game
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

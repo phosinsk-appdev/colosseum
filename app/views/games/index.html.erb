@@ -1,0 +1,150 @@
+<div>
+  <div>
+    <h1>
+      List of all games
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new game
+    </h2>
+
+    <form action="/insert_game" method="post">
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="release_date_box">
+          Release date
+        </label>
+
+        <input type="date" id="release_date_box" name="query_release_date">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image">
+      </div>
+
+      <div>
+        <label for="publisher_box">
+          Publisher
+        </label>
+
+        <input type="text" id="publisher_box" name="query_publisher">
+      </div>
+
+      <button>
+        Create game
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Release date
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Publisher
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_games.each do |a_game| %>
+      <tr>
+        <td>
+          <%= a_game.id %>
+        </td>
+
+        <td>
+          <%= a_game.title %>
+        </td>
+
+        <td>
+          <%= a_game.release_date %>
+        </td>
+
+        <td>
+          <%= a_game.description %>
+        </td>
+
+        <td>
+          <%= a_game.image %>
+        </td>
+
+        <td>
+          <%= a_game.publisher %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_game.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_game.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/games/<%= a_game.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
