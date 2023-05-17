@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Donation #<%= @the_donation.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/donations">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_donation/<%= @the_donation.id %>">
+          Delete donation
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Donator
+      </dt>
+      <dd>
+        <%= @the_donation.donator_id %>
+      </dd>
+
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_donation.event_id %>
+      </dd>
+
+      <dt>
+        Donation
+      </dt>
+      <dd>
+        <%= @the_donation.donation %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_donation.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_donation.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit donation
+    </h2>
+
+    <form action="/modify_donation/<%= @the_donation.id %>"  method="post" >
+      <div>
+        <label for="donator_id_box">
+          Donator
+        </label>
+
+        <input type="text" id="donator_id_box" name="query_donator_id" value="<%= @the_donation.donator_id %>">
+      </div>
+
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_donation.event_id %>">
+      </div>
+
+      <div>
+        <label for="donation_box">
+          Donation
+        </label>
+
+        <input type="text" id="donation_box" name="query_donation" value="<%= @the_donation.donation %>">
+      </div>
+
+      <button>
+        Update donation
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

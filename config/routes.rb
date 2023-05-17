@@ -2,6 +2,25 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Donation resource:
+
+  # CREATE
+  post("/insert_donation", { :controller => "donations", :action => "create" })
+          
+  # READ
+  get("/donations", { :controller => "donations", :action => "index" })
+  
+  get("/donations/:path_id", { :controller => "donations", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_donation/:path_id", { :controller => "donations", :action => "update" })
+  
+  # DELETE
+  get("/delete_donation/:path_id", { :controller => "donations", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Games player resource:
 
   # CREATE

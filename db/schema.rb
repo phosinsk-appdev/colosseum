@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_163128) do
+ActiveRecord::Schema.define(version: 2023_05_17_163231) do
+
+  create_table "donations", force: :cascade do |t|
+    t.integer "donator_id"
+    t.integer "event_id"
+    t.float "donation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title"

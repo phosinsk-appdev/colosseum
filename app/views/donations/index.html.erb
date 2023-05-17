@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all donations
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new donation
+    </h2>
+
+    <form action="/insert_donation" method="post">
+      <div>
+        <label for="donator_id_box">
+          Donator
+        </label>
+
+        <input type="text" id="donator_id_box" name="query_donator_id">
+      </div>
+
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id">
+      </div>
+
+      <div>
+        <label for="donation_box">
+          Donation
+        </label>
+
+        <input type="text" id="donation_box" name="query_donation">
+      </div>
+
+      <button>
+        Create donation
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Donator
+        </th>
+
+        <th>
+          Event
+        </th>
+
+        <th>
+          Donation
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_donations.each do |a_donation| %>
+      <tr>
+        <td>
+          <%= a_donation.id %>
+        </td>
+
+        <td>
+          <%= a_donation.donator_id %>
+        </td>
+
+        <td>
+          <%= a_donation.event_id %>
+        </td>
+
+        <td>
+          <%= a_donation.donation %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_donation.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_donation.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/donations/<%= a_donation.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
