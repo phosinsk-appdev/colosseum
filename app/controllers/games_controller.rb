@@ -24,6 +24,7 @@ class GamesController < ApplicationController
     the_game.description = params.fetch("query_description")
     the_game.image = params.fetch("query_image")
     the_game.publisher = params.fetch("query_publisher")
+    the_game.genre = params.fetch("query_genre")
 
     if the_game.valid?
       the_game.save
@@ -42,6 +43,7 @@ class GamesController < ApplicationController
     the_game.description = params.fetch("query_description")
     the_game.image = params.fetch("query_image")
     the_game.publisher = params.fetch("query_publisher")
+    the_game.genre = params.fetch("query_genre")
 
     if the_game.valid?
       the_game.save

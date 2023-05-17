@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+  # home page route
+  get("/", { :controller => "events", :action => "home" })
 
   # Routes for the Donation resource:
 

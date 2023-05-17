@@ -1,4 +1,11 @@
 class EventsController < ApplicationController
+  
+  def home
+
+    render({ :template => "events/home.html.erb" })
+
+  end
+  
   def index
     matching_events = Event.all
 
@@ -25,11 +32,11 @@ class EventsController < ApplicationController
     the_event.date_target = params.fetch("query_date_target")
     the_event.date_deadline = params.fetch("query_date_deadline")
     the_event.status = params.fetch("query_status")
-    the_event.creator_id = params.fetch("query_creator_id")
+    the_event.creator_id = @current_user.id
     the_event.game_id = params.fetch("query_game_id")
-    the_event.watch_details = params.fetch("query_watch_details")
-    the_event.battle_report = params.fetch("query_battle_report")
-    the_event.winning_team = params.fetch("query_winning_team")
+    # the_event.watch_details = params.fetch("query_watch_details")
+    # the_event.battle_report = params.fetch("query_battle_report")
+    # the_event.winning_team = params.fetch("query_winning_team")
 
     if the_event.valid?
       the_event.save
@@ -48,12 +55,12 @@ class EventsController < ApplicationController
     the_event.funding_target = params.fetch("query_funding_target")
     the_event.date_target = params.fetch("query_date_target")
     the_event.date_deadline = params.fetch("query_date_deadline")
-    the_event.status = params.fetch("query_status")
+    # the_event.status = params.fetch("query_status")
     the_event.creator_id = params.fetch("query_creator_id")
     the_event.game_id = params.fetch("query_game_id")
-    the_event.watch_details = params.fetch("query_watch_details")
-    the_event.battle_report = params.fetch("query_battle_report")
-    the_event.winning_team = params.fetch("query_winning_team")
+    # the_event.watch_details = params.fetch("query_watch_details")
+    # the_event.battle_report = params.fetch("query_battle_report")
+    # the_event.winning_team = params.fetch("query_winning_team")
 
     if the_event.valid?
       the_event.save

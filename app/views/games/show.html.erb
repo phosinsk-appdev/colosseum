@@ -27,6 +27,13 @@
       </dd>
 
       <dt>
+        Genre
+      </dt>
+      <dd>
+        <%= @the_game.genre %>
+      </dd>
+
+      <dt>
         Release date
       </dt>
       <dd>
@@ -87,6 +94,14 @@
         </label>
 
         <input type="text" id="title_box" name="query_title" value="<%= @the_game.title %>">
+      </div>
+
+      <div>
+        <label for="genre_box">
+          Genre
+        </label>
+
+        <input type="text" id="genre_box" name="query_genre" value="<%= @the_game.genre %>">
       </div>
 
       <div>

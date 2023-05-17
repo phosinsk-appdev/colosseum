@@ -16,6 +16,32 @@
   </head>
 
   <body>
+
+    <table border="1">
+      
+      <tr>
+        <td><a href="/">Home</a></td>
+        <td><a href="/events">Events</a></td>
+        <td><a href="/players">Players</a></td>
+        <td><a href="/games">Games</a></td>
+      </tr>
+
+    </table>
+
+    <% if @current_user == nil %>
+      <ul style="list-style: none;">
+        <li> <a href="/user_sign_in"> Sign In </a> </li>
+        <li> <a href="/user_sign_up"> Sign Up </a> </li>
+      </ul>
+    <% else %>
+      <ul style="list-style: none;">
+        <li> <a href="/user_sign_out"> Sign Out </a> </li>
+      </ul>
+    <% end %>
+
+    <p style="color: green"> <%= notice %> </p>
+    <p style="color: red"> <%= alert %> </p>
+
     <%= yield %>
   </body>
 </html>

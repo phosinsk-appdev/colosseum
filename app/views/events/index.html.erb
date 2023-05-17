@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all events
+      Events
     </h1>
   </div>
 </div>
@@ -15,6 +15,21 @@
     </h2>
 
     <form action="/insert_event" method="post">
+      <div>
+        <label for="game_id_box">
+          Game
+        </label>
+
+        <select name="query_game_id" id="game_id_box">
+
+        <% Game.all.order(:title).each do |a_game| %>
+          <option>
+            <%= a_game.title %>
+          </option>
+        <%end%>
+        </select>
+      </div>
+      
       <div>
         <label for="title_box">
           Title
@@ -33,7 +48,7 @@
 
       <div>
         <label for="funding_target_box">
-          Funding target
+          Funding goal
         </label>
 
         <input type="text" id="funding_target_box" name="query_funding_target">
@@ -41,7 +56,7 @@
 
       <div>
         <label for="date_target_box">
-          Date target
+          Target date (desired play by date)
         </label>
 
         <input type="date" id="date_target_box" name="query_date_target">
@@ -49,58 +64,14 @@
 
       <div>
         <label for="date_deadline_box">
-          Date deadline
+          Deadline date (play by deadline)
         </label>
 
         <input type="date" id="date_deadline_box" name="query_date_deadline">
       </div>
 
       <div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="text" id="status_box" name="query_status">
-      </div>
-
-      <div>
-        <label for="creator_id_box">
-          Creator
-        </label>
-
-        <input type="text" id="creator_id_box" name="query_creator_id">
-      </div>
-
-      <div>
-        <label for="game_id_box">
-          Game
-        </label>
-
-        <input type="text" id="game_id_box" name="query_game_id">
-      </div>
-
-      <div>
-        <label for="watch_details_box">
-          Watch details
-        </label>
-
-        <textarea id="watch_details_box" name="query_watch_details" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="battle_report_box">
-          Battle report
-        </label>
-
-        <textarea id="battle_report_box" name="query_battle_report" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="winning_team_box">
-          Winning team
-        </label>
-
-        <input type="text" id="winning_team_box" name="query_winning_team">
+        <input type="hidden" value="created" id="status_box" name="query_status">
       </div>
 
       <button>
