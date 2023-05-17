@@ -32,6 +32,14 @@ class Event < ApplicationRecord
   validates(:date_deadline, { :presence => { :message => "Please enter a deadline date for your event." } })
   validates(:creator_id, { :presence => true })
 
+  validate :deadline_date_after_target_date
+
+  def deadline_date_after_target_date
+    if date_deadline.present? && date_deadline < date_target
+      errors.add(:date_deadline, "Deadline date cannot be prior to the target date")
+    end
+  end
+
   # association accessors
   has_many(:donations, { :class_name => "Donation", :foreign_key => "event_id" })
   has_many(:events_players, { :class_name => "EventsPlayer", :foreign_key => "event_id", :dependent => :destroy })

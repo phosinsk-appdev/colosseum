@@ -40,6 +40,21 @@
       </div>
 
       <div>
+        <label for="main_game_box">
+          Primarily plays?
+        </label>
+
+        <select name="query_main_game" id="main_game_box">
+
+        <% @list_of_games.each do |a_game| %>
+          <option value="<%= a_game.id %>">
+            <%= a_game.title %>
+          </option>
+        <%end%>
+        </select>
+      </div>
+
+      <div>
         <label for="event_minimum_box">
           Event minimum
         </label>
@@ -64,35 +79,35 @@
       </div>
 
       <div>
-        <label for="social_one_box">
-          Social one
+        <label for="twitch_box">
+          Twitch
         </label>
 
-        <input type="text" id="social_one_box" name="query_social_one">
+        <input type="text" id="twitch_box" name="query_twitch">
       </div>
 
       <div>
-        <label for="social_two_box">
-          Social two
+        <label for="youtube_box">
+          YouTube
         </label>
 
-        <input type="text" id="social_two_box" name="query_social_two">
+        <input type="text" id="youtube_box" name="query_youtube">
       </div>
 
       <div>
-        <label for="social_three_box">
-          Social three
+        <label for="twitter_box">
+          Twitter
         </label>
 
-        <input type="text" id="social_three_box" name="query_social_three">
+        <input type="text" id="twitter_box" name="query_twitter">
       </div>
 
       <div>
-        <label for="social_four_box">
-          Social four
+        <label for="liquipedia_box">
+          Liquipedia
         </label>
 
-        <input type="text" id="social_four_box" name="query_social_four">
+        <input type="text" id="liquipedia_box" name="query_liquipedia">
       </div>
 
       <button>
@@ -107,9 +122,6 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Nickname
@@ -128,46 +140,28 @@
         </th>
 
         <th>
-          Email
+          Twitch
         </th>
 
         <th>
-          Phone number
+          YouTube
         </th>
 
         <th>
-          Social one
+          Twitter
         </th>
 
         <th>
-          Social two
+          Liquipedia
         </th>
 
         <th>
-          Social three
-        </th>
-
-        <th>
-          Social four
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
+         Show Details
         </th>
       </tr>
 
       <% @list_of_players.each do |a_player| %>
       <tr>
-        <td>
-          <%= a_player.id %>
-        </td>
 
         <td>
           <%= a_player.nickname %>
@@ -186,14 +180,6 @@
         </td>
 
         <td>
-          <%= a_player.email %>
-        </td>
-
-        <td>
-          <%= a_player.phone_number %>
-        </td>
-
-        <td>
           <%= a_player.social_one %>
         </td>
 
@@ -207,13 +193,6 @@
 
         <td>
           <%= a_player.social_four %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_player.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_player.updated_at) %> ago
         </td>
 
         <td>

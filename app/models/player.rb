@@ -7,6 +7,7 @@
 #  dob           :date
 #  email         :string
 #  event_minimum :float
+#  main_game     :integer
 #  nickname      :string
 #  phone_number  :string
 #  social_four   :string

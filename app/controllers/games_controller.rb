@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   def index
     matching_games = Game.all
 
-    @list_of_games = matching_games.order({ :created_at => :desc })
+    @list_of_games = matching_games.order({ :title => :asc })
 
     render({ :template => "games/index.html.erb" })
   end

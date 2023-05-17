@@ -22,8 +22,8 @@
 
         <select name="query_game_id" id="game_id_box">
 
-        <% Game.all.order(:title).each do |a_game| %>
-          <option>
+        <% @list_of_games.each do |a_game| %>
+          <option value="<%= a_game.id %>">
             <%= a_game.title %>
           </option>
         <%end%>
@@ -86,36 +86,9 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Title
-        </th>
-
-        <th>
-          Description
-        </th>
-
-        <th>
-          Funding target
-        </th>
-
-        <th>
-          Date target
-        </th>
-
-        <th>
-          Date deadline
-        </th>
-
-        <th>
-          Status
-        </th>
-
-        <th>
-          Creator
         </th>
 
         <th>
@@ -123,37 +96,35 @@
         </th>
 
         <th>
-          Watch details
+          Description
         </th>
 
         <th>
-          Battle report
+          Funding Goal
         </th>
 
         <th>
-          Winning team
+          Funds Raised
         </th>
 
         <th>
-          Created at
+          Target Date
         </th>
 
         <th>
-          Updated at
-        </th>
-
-        <th>
+        Show Details
         </th>
       </tr>
 
       <% @list_of_events.each do |an_event| %>
       <tr>
-        <td>
-          <%= an_event.id %>
-        </td>
 
         <td>
           <%= an_event.title %>
+        </td>
+
+        <td>
+          <%= an_event.game.title %>
         </td>
 
         <td>
@@ -165,42 +136,11 @@
         </td>
 
         <td>
+          <%= "placeholder" %>
+        </td>
+
+        <td>
           <%= an_event.date_target %>
-        </td>
-
-        <td>
-          <%= an_event.date_deadline %>
-        </td>
-
-        <td>
-          <%= an_event.status %>
-        </td>
-
-        <td>
-          <%= an_event.creator_id %>
-        </td>
-
-        <td>
-          <%= an_event.game_id %>
-        </td>
-
-        <td>
-          <%= an_event.watch_details %>
-        </td>
-
-        <td>
-          <%= an_event.battle_report %>
-        </td>
-
-        <td>
-          <%= an_event.winning_team %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(an_event.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(an_event.updated_at) %> ago
         </td>
 
         <td>

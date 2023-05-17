@@ -1,8 +1,13 @@
 class PlayersController < ApplicationController
   def index
+    
+    matching_games = Game.all
+
+    @list_of_games = matching_games.order({ :title => :asc })
+   
     matching_players = Player.all
 
-    @list_of_players = matching_players.order({ :created_at => :desc })
+    @list_of_players = matching_players.order({ :nickname => :asc })
 
     render({ :template => "players/index.html.erb" })
   end
@@ -25,10 +30,11 @@ class PlayersController < ApplicationController
     the_player.event_minimum = params.fetch("query_event_minimum")
     the_player.email = params.fetch("query_email")
     the_player.phone_number = params.fetch("query_phone_number")
-    the_player.social_one = params.fetch("query_social_one")
-    the_player.social_two = params.fetch("query_social_two")
-    the_player.social_three = params.fetch("query_social_three")
-    the_player.social_four = params.fetch("query_social_four")
+    the_player.social_one = params.fetch("query_twitch")
+    the_player.social_two = params.fetch("query_youtube")
+    the_player.social_three = params.fetch("query_twitter")
+    the_player.social_four = params.fetch("query_liquipedia")
+    the_player.main_game = params.fetch("query_main_game")
 
     if the_player.valid?
       the_player.save
@@ -48,10 +54,11 @@ class PlayersController < ApplicationController
     the_player.event_minimum = params.fetch("query_event_minimum")
     the_player.email = params.fetch("query_email")
     the_player.phone_number = params.fetch("query_phone_number")
-    the_player.social_one = params.fetch("query_social_one")
-    the_player.social_two = params.fetch("query_social_two")
-    the_player.social_three = params.fetch("query_social_three")
-    the_player.social_four = params.fetch("query_social_four")
+    the_player.social_one = params.fetch("query_twitch")
+    the_player.social_two = params.fetch("query_youtube")
+    the_player.social_three = params.fetch("query_twitter")
+    the_player.social_four = params.fetch("query_liquipedia")
+    the_player.main_game = params.fetch("query_main_game")
 
     if the_player.valid?
       the_player.save

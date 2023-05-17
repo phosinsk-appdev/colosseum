@@ -7,6 +7,10 @@ class EventsController < ApplicationController
   end
   
   def index
+    matching_games = Game.all
+
+    @list_of_games = matching_games.order({ :title => :asc })
+   
     matching_events = Event.all
 
     @list_of_events = matching_events.order({ :created_at => :desc })
