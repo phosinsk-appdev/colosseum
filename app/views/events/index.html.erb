@@ -1,0 +1,246 @@
+<div>
+  <div>
+    <h1>
+      List of all events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new event
+    </h2>
+
+    <form action="/insert_event" method="post">
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="funding_target_box">
+          Funding target
+        </label>
+
+        <input type="text" id="funding_target_box" name="query_funding_target">
+      </div>
+
+      <div>
+        <label for="date_target_box">
+          Date target
+        </label>
+
+        <input type="date" id="date_target_box" name="query_date_target">
+      </div>
+
+      <div>
+        <label for="date_deadline_box">
+          Date deadline
+        </label>
+
+        <input type="date" id="date_deadline_box" name="query_date_deadline">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status">
+      </div>
+
+      <div>
+        <label for="creator_id_box">
+          Creator
+        </label>
+
+        <input type="text" id="creator_id_box" name="query_creator_id">
+      </div>
+
+      <div>
+        <label for="game_id_box">
+          Game
+        </label>
+
+        <input type="text" id="game_id_box" name="query_game_id">
+      </div>
+
+      <div>
+        <label for="watch_details_box">
+          Watch details
+        </label>
+
+        <textarea id="watch_details_box" name="query_watch_details" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="battle_report_box">
+          Battle report
+        </label>
+
+        <textarea id="battle_report_box" name="query_battle_report" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="winning_team_box">
+          Winning team
+        </label>
+
+        <input type="text" id="winning_team_box" name="query_winning_team">
+      </div>
+
+      <button>
+        Create event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Funding target
+        </th>
+
+        <th>
+          Date target
+        </th>
+
+        <th>
+          Date deadline
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Creator
+        </th>
+
+        <th>
+          Game
+        </th>
+
+        <th>
+          Watch details
+        </th>
+
+        <th>
+          Battle report
+        </th>
+
+        <th>
+          Winning team
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_events.each do |an_event| %>
+      <tr>
+        <td>
+          <%= an_event.id %>
+        </td>
+
+        <td>
+          <%= an_event.title %>
+        </td>
+
+        <td>
+          <%= an_event.description %>
+        </td>
+
+        <td>
+          <%= an_event.funding_target %>
+        </td>
+
+        <td>
+          <%= an_event.date_target %>
+        </td>
+
+        <td>
+          <%= an_event.date_deadline %>
+        </td>
+
+        <td>
+          <%= an_event.status %>
+        </td>
+
+        <td>
+          <%= an_event.creator_id %>
+        </td>
+
+        <td>
+          <%= an_event.game_id %>
+        </td>
+
+        <td>
+          <%= an_event.watch_details %>
+        </td>
+
+        <td>
+          <%= an_event.battle_report %>
+        </td>
+
+        <td>
+          <%= an_event.winning_team %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_event.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_event.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/events/<%= an_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

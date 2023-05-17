@@ -1,0 +1,221 @@
+<div>
+  <div>
+    <h1>
+      Event #<%= @the_event.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_event/<%= @the_event.id %>">
+          Delete event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_event.title %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_event.description %>
+      </dd>
+
+      <dt>
+        Funding target
+      </dt>
+      <dd>
+        <%= @the_event.funding_target %>
+      </dd>
+
+      <dt>
+        Date target
+      </dt>
+      <dd>
+        <%= @the_event.date_target %>
+      </dd>
+
+      <dt>
+        Date deadline
+      </dt>
+      <dd>
+        <%= @the_event.date_deadline %>
+      </dd>
+
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_event.status %>
+      </dd>
+
+      <dt>
+        Creator
+      </dt>
+      <dd>
+        <%= @the_event.creator_id %>
+      </dd>
+
+      <dt>
+        Game
+      </dt>
+      <dd>
+        <%= @the_event.game_id %>
+      </dd>
+
+      <dt>
+        Watch details
+      </dt>
+      <dd>
+        <%= @the_event.watch_details %>
+      </dd>
+
+      <dt>
+        Battle report
+      </dt>
+      <dd>
+        <%= @the_event.battle_report %>
+      </dd>
+
+      <dt>
+        Winning team
+      </dt>
+      <dd>
+        <%= @the_event.winning_team %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit event
+    </h2>
+
+    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_event.title %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_event.description %></textarea>
+      </div>
+
+      <div>
+        <label for="funding_target_box">
+          Funding target
+        </label>
+
+        <input type="text" id="funding_target_box" name="query_funding_target" value="<%= @the_event.funding_target %>">
+      </div>
+
+      <div>
+        <label for="date_target_box">
+          Date target
+        </label>
+
+        <input type="date" id="date_target_box" name="query_date_target" value="<%= @the_event.date_target %>">
+      </div>
+
+      <div>
+        <label for="date_deadline_box">
+          Date deadline
+        </label>
+
+        <input type="date" id="date_deadline_box" name="query_date_deadline" value="<%= @the_event.date_deadline %>">
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status" value="<%= @the_event.status %>">
+      </div>
+
+      <div>
+        <label for="creator_id_box">
+          Creator
+        </label>
+
+        <input type="text" id="creator_id_box" name="query_creator_id" value="<%= @the_event.creator_id %>">
+      </div>
+
+      <div>
+        <label for="game_id_box">
+          Game
+        </label>
+
+        <input type="text" id="game_id_box" name="query_game_id" value="<%= @the_event.game_id %>">
+      </div>
+
+      <div>
+        <label for="watch_details_box">
+          Watch details
+        </label>
+
+        <textarea id="watch_details_box" name="query_watch_details"><%= @the_event.watch_details %></textarea>
+      </div>
+
+      <div>
+        <label for="battle_report_box">
+          Battle report
+        </label>
+
+        <textarea id="battle_report_box" name="query_battle_report"><%= @the_event.battle_report %></textarea>
+      </div>
+
+      <div>
+        <label for="winning_team_box">
+          Winning team
+        </label>
+
+        <input type="text" id="winning_team_box" name="query_winning_team" value="<%= @the_event.winning_team %>">
+      </div>
+
+      <button>
+        Update event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
