@@ -29,5 +29,6 @@ class Player < ApplicationRecord
   # association accessors
   has_many(:games_players, { :class_name => "GamesPlayer", :foreign_key => "player_id", :dependent => :destroy })
   has_many(:events_players, { :class_name => "EventsPlayer", :foreign_key => "player_id" })
+  belongs_to(:main, { :required => true, :class_name => "Game", :foreign_key => "main_game" })
 
 end

@@ -25,5 +25,6 @@ class Game < ApplicationRecord
   # association accessors
   has_many(:events, { :class_name => "Event", :foreign_key => "game_id", :dependent => :destroy })
   has_many(:games_players, { :class_name => "GamesPlayer", :foreign_key => "game_id", :dependent => :destroy })
-
+  has_many(:players, { :class_name => "Player", :foreign_key => "main_game", :dependent => :destroy })
+  
 end
