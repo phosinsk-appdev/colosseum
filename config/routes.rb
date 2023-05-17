@@ -2,6 +2,25 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Player resource:
+
+  # CREATE
+  post("/insert_player", { :controller => "players", :action => "create" })
+          
+  # READ
+  get("/players", { :controller => "players", :action => "index" })
+  
+  get("/players/:path_id", { :controller => "players", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_player/:path_id", { :controller => "players", :action => "update" })
+  
+  # DELETE
+  get("/delete_player/:path_id", { :controller => "players", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Game resource:
 
   # CREATE

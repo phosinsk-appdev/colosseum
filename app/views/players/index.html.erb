@@ -1,0 +1,230 @@
+<div>
+  <div>
+    <h1>
+      List of all players
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new player
+    </h2>
+
+    <form action="/insert_player" method="post">
+      <div>
+        <label for="nickname_box">
+          Nickname
+        </label>
+
+        <input type="text" id="nickname_box" name="query_nickname">
+      </div>
+
+      <div>
+        <label for="dob_box">
+          Dob
+        </label>
+
+        <input type="date" id="dob_box" name="query_dob">
+      </div>
+
+      <div>
+        <label for="bio_box">
+          Bio
+        </label>
+
+        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="event_minimum_box">
+          Event minimum
+        </label>
+
+        <input type="text" id="event_minimum_box" name="query_event_minimum">
+      </div>
+
+      <div>
+        <label for="email_box">
+          Email
+        </label>
+
+        <input type="text" id="email_box" name="query_email">
+      </div>
+
+      <div>
+        <label for="phone_number_box">
+          Phone number
+        </label>
+
+        <input type="text" id="phone_number_box" name="query_phone_number">
+      </div>
+
+      <div>
+        <label for="social_one_box">
+          Social one
+        </label>
+
+        <input type="text" id="social_one_box" name="query_social_one">
+      </div>
+
+      <div>
+        <label for="social_two_box">
+          Social two
+        </label>
+
+        <input type="text" id="social_two_box" name="query_social_two">
+      </div>
+
+      <div>
+        <label for="social_three_box">
+          Social three
+        </label>
+
+        <input type="text" id="social_three_box" name="query_social_three">
+      </div>
+
+      <div>
+        <label for="social_four_box">
+          Social four
+        </label>
+
+        <input type="text" id="social_four_box" name="query_social_four">
+      </div>
+
+      <button>
+        Create player
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Nickname
+        </th>
+
+        <th>
+          Dob
+        </th>
+
+        <th>
+          Bio
+        </th>
+
+        <th>
+          Event minimum
+        </th>
+
+        <th>
+          Email
+        </th>
+
+        <th>
+          Phone number
+        </th>
+
+        <th>
+          Social one
+        </th>
+
+        <th>
+          Social two
+        </th>
+
+        <th>
+          Social three
+        </th>
+
+        <th>
+          Social four
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_players.each do |a_player| %>
+      <tr>
+        <td>
+          <%= a_player.id %>
+        </td>
+
+        <td>
+          <%= a_player.nickname %>
+        </td>
+
+        <td>
+          <%= a_player.dob %>
+        </td>
+
+        <td>
+          <%= a_player.bio %>
+        </td>
+
+        <td>
+          <%= a_player.event_minimum %>
+        </td>
+
+        <td>
+          <%= a_player.email %>
+        </td>
+
+        <td>
+          <%= a_player.phone_number %>
+        </td>
+
+        <td>
+          <%= a_player.social_one %>
+        </td>
+
+        <td>
+          <%= a_player.social_two %>
+        </td>
+
+        <td>
+          <%= a_player.social_three %>
+        </td>
+
+        <td>
+          <%= a_player.social_four %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_player.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_player.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/players/<%= a_player.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

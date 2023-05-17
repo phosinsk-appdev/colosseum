@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_162520) do
+ActiveRecord::Schema.define(version: 2023_05_17_162655) do
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 2023_05_17_162520) do
     t.text "description"
     t.string "image"
     t.string "publisher"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "nickname"
+    t.date "dob"
+    t.text "bio"
+    t.float "event_minimum"
+    t.string "email"
+    t.string "phone_number"
+    t.string "social_one"
+    t.string "social_two"
+    t.string "social_three"
+    t.string "social_four"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

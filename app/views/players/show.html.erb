@@ -1,0 +1,206 @@
+<div>
+  <div>
+    <h1>
+      Player #<%= @the_player.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/players">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_player/<%= @the_player.id %>">
+          Delete player
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Nickname
+      </dt>
+      <dd>
+        <%= @the_player.nickname %>
+      </dd>
+
+      <dt>
+        Dob
+      </dt>
+      <dd>
+        <%= @the_player.dob %>
+      </dd>
+
+      <dt>
+        Bio
+      </dt>
+      <dd>
+        <%= @the_player.bio %>
+      </dd>
+
+      <dt>
+        Event minimum
+      </dt>
+      <dd>
+        <%= @the_player.event_minimum %>
+      </dd>
+
+      <dt>
+        Email
+      </dt>
+      <dd>
+        <%= @the_player.email %>
+      </dd>
+
+      <dt>
+        Phone number
+      </dt>
+      <dd>
+        <%= @the_player.phone_number %>
+      </dd>
+
+      <dt>
+        Social one
+      </dt>
+      <dd>
+        <%= @the_player.social_one %>
+      </dd>
+
+      <dt>
+        Social two
+      </dt>
+      <dd>
+        <%= @the_player.social_two %>
+      </dd>
+
+      <dt>
+        Social three
+      </dt>
+      <dd>
+        <%= @the_player.social_three %>
+      </dd>
+
+      <dt>
+        Social four
+      </dt>
+      <dd>
+        <%= @the_player.social_four %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_player.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_player.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit player
+    </h2>
+
+    <form action="/modify_player/<%= @the_player.id %>"  method="post" >
+      <div>
+        <label for="nickname_box">
+          Nickname
+        </label>
+
+        <input type="text" id="nickname_box" name="query_nickname" value="<%= @the_player.nickname %>">
+      </div>
+
+      <div>
+        <label for="dob_box">
+          Dob
+        </label>
+
+        <input type="date" id="dob_box" name="query_dob" value="<%= @the_player.dob %>">
+      </div>
+
+      <div>
+        <label for="bio_box">
+          Bio
+        </label>
+
+        <textarea id="bio_box" name="query_bio"><%= @the_player.bio %></textarea>
+      </div>
+
+      <div>
+        <label for="event_minimum_box">
+          Event minimum
+        </label>
+
+        <input type="text" id="event_minimum_box" name="query_event_minimum" value="<%= @the_player.event_minimum %>">
+      </div>
+
+      <div>
+        <label for="email_box">
+          Email
+        </label>
+
+        <input type="text" id="email_box" name="query_email" value="<%= @the_player.email %>">
+      </div>
+
+      <div>
+        <label for="phone_number_box">
+          Phone number
+        </label>
+
+        <input type="text" id="phone_number_box" name="query_phone_number" value="<%= @the_player.phone_number %>">
+      </div>
+
+      <div>
+        <label for="social_one_box">
+          Social one
+        </label>
+
+        <input type="text" id="social_one_box" name="query_social_one" value="<%= @the_player.social_one %>">
+      </div>
+
+      <div>
+        <label for="social_two_box">
+          Social two
+        </label>
+
+        <input type="text" id="social_two_box" name="query_social_two" value="<%= @the_player.social_two %>">
+      </div>
+
+      <div>
+        <label for="social_three_box">
+          Social three
+        </label>
+
+        <input type="text" id="social_three_box" name="query_social_three" value="<%= @the_player.social_three %>">
+      </div>
+
+      <div>
+        <label for="social_four_box">
+          Social four
+        </label>
+
+        <input type="text" id="social_four_box" name="query_social_four" value="<%= @the_player.social_four %>">
+      </div>
+
+      <button>
+        Update player
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
