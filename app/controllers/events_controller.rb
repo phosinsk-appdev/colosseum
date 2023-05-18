@@ -25,6 +25,12 @@ class EventsController < ApplicationController
 
     @the_event = matching_events.at(0)
 
+    @game = @the_event.game
+
+    @creator = User.where(:id => @the_event.creator_id)
+
+    @funds_raised = @the_event.donations.sum(:donation)
+
     render({ :template => "events/show.html.erb" })
   end
 
