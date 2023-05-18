@@ -17,19 +17,57 @@ class EventsPlayersController < ApplicationController
     render({ :template => "events_players/show.html.erb" })
   end
 
-  def create
-    the_events_player = EventsPlayer.new
-    the_events_player.event_id = params.fetch("query_event_id")
-    the_events_player.team = params.fetch("query_team")
-    the_events_player.player_id = params.fetch("query_player_id")
+def add_player
 
-    if the_events_player.valid?
-      the_events_player.save
-      redirect_to("/events_players", { :notice => "Events player created successfully." })
-    else
-      redirect_to("/events_players", { :alert => the_events_player.errors.full_messages.to_sentence })
-    end
+  @event_id = params.fetch("path_id")
+  @event = Event.where({ :id => @event_id }).at(0)
+  @list_of_players = Player.all.order(nickname: :asc)
+  @teams = [1,2]
+
+  @event_players = EventsPlayer.where({ :event_id => @event_id })
+
+  render({ :template => "events_players/add_player.html.erb" })
+
+end
+
+def remove_player
+  the_id = params.fetch("path_id")
+  the_events_player = EventsPlayer.find_by(id: the_id)
+  the_event_id = the_events_player.event_id
+  the_events_player.destroy
+
+  redirect_to("/events_players/#{the_event_id}/add_player", { :notice => "Player removed successfully." })
+end
+
+
+def insert_player
+  the_events_player = EventsPlayer.new
+  the_events_player.event_id = params.fetch("path_id")
+  the_events_player.team = params.fetch("query_team_id")
+  the_events_player.player_id = params.fetch("query_player_id")
+
+  if the_events_player.valid?
+    the_events_player.save
+    redirect_to("/events_players/#{the_events_player.event_id}/add_player", { :notice => "Player added successfully." })
+  else
+    redirect_to("/events_players/#{the_events_player.event_id}/add_player", { :alert => the_events_player.errors.full_messages.to_sentence })
   end
+end
+
+
+  # def create
+  #   the_events_player = EventsPlayer.new
+  #   the_events_player.event_id = params.fetch("query_event_id")
+  #   the_events_player.team = params.fetch("query_team")
+  #   the_events_player.player_id = params.fetch("query_player_id")
+
+  #   if the_events_player.valid?
+  #     the_events_player.save
+  #     redirect_to("/events_players", { :notice => "Events player created successfully." })
+  #   else
+  #     redirect_to("/events_players", { :alert => the_events_player.errors.full_messages.to_sentence })
+  #   end
+  # end
 
   def update
     the_id = params.fetch("path_id")

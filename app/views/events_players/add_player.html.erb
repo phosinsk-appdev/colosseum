@@ -1,0 +1,62 @@
+<h2>Add a new player to the event</h2>
+
+<form action="/events_players/<%=@event.id%>/add_player" method="post">
+
+    <div>
+      <label for="player_id_box">
+        Player
+      </label>
+
+      <select name="query_player_id" id="player_id_box">
+
+        <% @list_of_players.each do |a_player| %>
+          <option value="<%= a_player.id %>">
+            <%= a_player.nickname %>
+          </option>
+        <%end%>
+      </select>
+    </div>
+
+    <div>
+      <label for="team_id_box">
+        Team
+      </label>
+
+      <select name="query_team_id" id="team_id_box">
+        <% @teams.each do |a_team| %>
+          <option> <%= a_team %> </option>
+        <% end %>
+      </select>
+    </div>
+
+      <button>
+        Add Player to Event
+      </button>
+    </form>
+
+<hr>
+<h2>Players in this event</h2>
+
+<table border="1">
+  <tr>
+    <th>Player Name</th>
+    <th>Team</th>
+    <th>Action</th>
+  </tr>
+
+<% @event_players.each do |a_player| %>
+    <tr>
+      <td><%= Player.find(a_player.player_id).nickname %></td>
+      <td><%= a_player.team %></td>
+      <td>
+
+      <form action="/events_players/<%=a_player.id%>/remove" method="post">
+        <input type="submit" value="Remove">
+      </td>
+    </tr>
+
+  <% end %>
+</table>
+
+ <hr>
+<%= button_to 'Done Adding Players', "/events/#{@event.id}", method: :get %>

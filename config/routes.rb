@@ -41,25 +41,6 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  # Routes for the Events player resource:
-
-  # CREATE
-  post("/insert_events_player", { :controller => "events_players", :action => "create" })
-          
-  # READ
-  get("/events_players", { :controller => "events_players", :action => "index" })
-  
-  get("/events_players/:path_id", { :controller => "events_players", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_events_player/:path_id", { :controller => "events_players", :action => "update" })
-  
-  # DELETE
-  get("/delete_events_player/:path_id", { :controller => "events_players", :action => "destroy" })
-
-  #------------------------------
-
   # Routes for the Player resource:
 
   # CREATE
@@ -143,5 +124,30 @@ Rails.application.routes.draw do
   get("/delete_event/:path_id", { :controller => "events", :action => "destroy" })
 
   #------------------------------
+
+  #------------------------------
+
+  # Routes for the Events player resource:
+
+  get("/events_players/:path_id/add_player", { :controller => "events_players", :action => "add_player"})
+  post("/events_players/:path_id/add_player", { :controller => "events_players", :action => "insert_player"})
+  post("/events_players/:path_id/remove", { :controller => "events_players", :action => "remove_player"})
+
+
+  # CREATE
+  # post("/insert_events_player", { :controller => "events_players", :action => "create" })
+          
+  # READ
+  get("/events_players", { :controller => "events_players", :action => "index" })
+  
+  get("/events_players/:path_id", { :controller => "events_players", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_events_player/:path_id", { :controller => "events_players", :action => "update" })
+  
+  # DELETE
+  get("/delete_events_player/:path_id", { :controller => "events_players", :action => "destroy" })
+
 
 end

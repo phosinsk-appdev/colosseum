@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
     if the_event.valid?
       the_event.save
-      redirect_to("/events", { :notice => "Event created successfully." })
+      redirect_to("/events_players/#{the_event.id}/add_player", { :notice => "Event created successfully." })
     else
       redirect_to("/events", { :alert => the_event.errors.full_messages.to_sentence })
     end
