@@ -88,11 +88,15 @@ class EventsController < ApplicationController
     @event.funding_target = params[:query_funding_target]
 
     if @event.funding_target >= @min_funding_target
+      if @event.funding_target <= 100000
         @event.save
         redirect_to("/events/#{the_id}", { :notice => "Funding target was successfully updated."} )
       else
-        redirect_to("/events/#{the_id}/set_funding_target", { :notice => "Funding target not updated - below minimum given players involved (#{@min_funding_target})"} )
+        redirect_to("/events/#{the_id}/set_funding_target", { :alert => "Funding target cannot exceed $100,000"} )
       end
+    else
+      redirect_to("/events/#{the_id}/set_funding_target", { :notice => "Funding target not updated - below minimum given players involved (#{@min_funding_target})"} )
+    end
   end
 
   def destroy
