@@ -1,0 +1,16 @@
+<h2>Set a Funding Target for Your Event</h2>
+
+<form action="/events/<%=@event.id%>/set_funding_target" method="post">
+
+  <div>
+    <label for="funding_target_box">
+      Funding Target (Minimum: <%= @min_funding_target %>)
+    </label>
+    <input type="number" id="funding_target_box" name="query_funding_target" min="<%= @min_funding_target %>" value="<%= @min_funding_target %>" required>
+  </div>
+
+  <button>
+    Set Funding Target
+  </button>
+
+</form>

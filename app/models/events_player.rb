@@ -14,4 +14,6 @@ class EventsPlayer < ApplicationRecord
   belongs_to(:event, { :required => true, :class_name => "Event", :foreign_key => "event_id" })
   belongs_to(:player, { :required => true, :class_name => "Player", :foreign_key => "player_id" })
 
+  validates(:player_id, {:uniqueness => { :scope => ["event_id"], :message => "has already been added to this event" }})
+
 end

@@ -22,6 +22,13 @@ Rails.application.routes.draw do
 
   #------------------------------
 
+    # donation step in flow
+
+    get("/events/:path_id/set_funding_target", { :controller => "events", :action => "set_funding_target"})
+    post("/events/:path_id/set_funding_target", { :controller => "events", :action => "update_funding_target"})
+
+ #------------------------------
+
   # Routes for the Games player resource:
 
   # CREATE

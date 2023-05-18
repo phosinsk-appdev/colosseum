@@ -17,7 +17,7 @@ class EventsPlayersController < ApplicationController
     render({ :template => "events_players/show.html.erb" })
   end
 
-def add_player
+def add_player # DO THESE NEED TO BE SEPARATE? IS ONE REALLY FOR UPDATE?
 
   @event_id = params.fetch("path_id")
   @event = Event.where({ :id => @event_id }).at(0)
@@ -30,16 +30,6 @@ def add_player
 
 end
 
-def remove_player
-  the_id = params.fetch("path_id")
-  the_events_player = EventsPlayer.find_by(id: the_id)
-  the_event_id = the_events_player.event_id
-  the_events_player.destroy
-
-  redirect_to("/events_players/#{the_event_id}/add_player", { :notice => "Player removed successfully." })
-end
-
-
 def insert_player
   the_events_player = EventsPlayer.new
   the_events_player.event_id = params.fetch("path_id")
@@ -51,7 +41,17 @@ def insert_player
     redirect_to("/events_players/#{the_events_player.event_id}/add_player", { :notice => "Player added successfully." })
   else
     redirect_to("/events_players/#{the_events_player.event_id}/add_player", { :alert => the_events_player.errors.full_messages.to_sentence })
-  end
+end
+
+def remove_player
+  the_id = params.fetch("path_id")
+  the_events_player = EventsPlayer.find_by(id: the_id)
+  the_event_id = the_events_player.event_id
+  the_events_player.destroy
+
+  redirect_to("/events_players/#{the_event_id}/add_player", { :notice => "Player removed successfully." })
+end
+
 end
 
 

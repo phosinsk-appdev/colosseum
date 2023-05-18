@@ -116,12 +116,19 @@
 <hr>
 
 
-<div>
+
+
+<% if @current_user == nil %>
+
+  <% else %>
+
+  <div>
   <div>
     <h2>
       Edit event
     </h2>
 
+    <% if @current_user.id == @the_event.creator_id %>
     <form action="/modify_event/<%= @the_event.id %>"  method="post" >
       <div>
         <label for="title_box">
@@ -217,5 +224,8 @@
     </form>
   </div>
 </div>
+
+<% end %>
+<% end %>
 
 <hr>

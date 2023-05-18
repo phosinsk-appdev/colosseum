@@ -51,7 +51,7 @@
       <td>
 
       <form action="/events_players/<%=a_player.id%>/remove" method="post">
-        <input type="submit" value="Remove">
+        <input type="submit" value="Remove"> </form>
       </td>
     </tr>
 
@@ -59,4 +59,7 @@
 </table>
 
  <hr>
-<%= button_to 'Done Adding Players', "/events/#{@event.id}", method: :get %>
+ 
+ <form action="/events/<%=@event_id%>/set_funding_target" method="get">
+        <input type="submit" value="Done Adding Players">
+  </form>
