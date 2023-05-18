@@ -5,125 +5,92 @@
     </h1>
 
     <div>
-      <div>
-        <a href="/events">
-          Go back
-        </a>
-      </div>
-
-<% if @current_user != nil && @current_user.id == @the_event.creator_id %>
-      <div>
-        <a href="/delete_event/<%= @the_event.id %>">
-          Delete event
-        </a>
-      </div>
+      <a href="/events">Go back</a>
     </div>
-<%end%>
 
-    <dl>
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_event.title %>
-      </dd>
+    <% if @current_user != nil && @current_user.id == @the_event.creator_id %>
+      <div>
+        <a href="/delete_event/<%= @the_event.id %>">Delete event</a>
+      </div>
+    <% end %>
+    
+    <table>
+      <tr>
+        <th>Title</th>
+        <td><%= @the_event.title %></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><%= @the_event.description %></td>
+      </tr>
+      <tr>
+        <th>Date target</th>
+        <td><%= @the_event.date_target %></td>
+      </tr>
+      <tr>
+        <th>Date deadline</th>
+        <td><%= @the_event.date_deadline %></td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td><%= @the_event.status %></td>
+      </tr>
+      <tr>
+        <th>Game</th>
+        <td><%= @game.title %></td>
+      </tr>
+      <tr>
+        <th>Watch details</th>
+        <td><%= @the_event.watch_details %></td>
+      </tr>
+      <tr>
+        <th>Created at</th>
+        <td><%= time_ago_in_words(@the_event.created_at) %> ago</td>
+      </tr>
+      <tr>
+        <th>Updated at</th>
+        <td><%= time_ago_in_words(@the_event.updated_at) %> ago</td>
+      </tr>
+      <% if @the_event.status == "complete" %>
+        <tr>
+          <th>Battle report</th>
+          <td><%= @the_event.battle_report %></td>
+        </tr>
+        <tr>
+          <th>Winning team</th>
+          <td><%= @the_event.winning_team %></td>
+        </tr>
+      <% end %>
+    </table>
 
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_event.description %>
-      </dd>
+    <hr>
 
-      <dt>
-        Funding target
-      </dt>
-      <dd>
-        <%= @the_event.funding_target %>
-      </dd>
+    <div>
+      <h2>Funding</h2>
+      <p>Target: <%= @the_event.funding_target %></p>
+      <p>Current funding: <%= @funds_raised %></p>
 
-      <dt>
-        Date target
-      </dt>
-      <dd>
-        <%= @the_event.date_target %>
-      </dd>
+      <p>Your funding: <%= @your_funds_raised %></p>
 
-      <dt>
-        Date deadline
-      </dt>
-      <dd>
-        <%= @the_event.date_deadline %>
-      </dd>
+      <% if @current_user != nil %>
+        <h3>Donate</h3>
+        <form action="/insert_donation" method="post">
+          
+          <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
+          <input type="hidden" name="query_donator_id" value="<%= @current_user.id %>">
+          
+          <label for="donation_amount">Amount:</label>
+          <input type="number" id="query_donation_amount" name="query_donation_amount" min="1" step="any">
 
-      <dt>
-        Status
-      </dt>
-      <dd>
-        <%= @the_event.status %>
-      </dd>
+          <button type="submit">Donate</button>
+        </form>
+      <% end %>
+    </div>
 
-      <dt>
-        Creator
-      </dt>
-      <dd>
-        <%= @the_event.creator_id %>
-      </dd>
-
-      <dt>
-        Game
-      </dt>
-      <dd>
-        <%= @the_event.game_id %>
-      </dd>
-
-      <dt>
-        Watch details
-      </dt>
-      <dd>
-        <%= @the_event.watch_details %>
-      </dd>
-
-      <dt>
-        Battle report
-      </dt>
-      <dd>
-        <%= @the_event.battle_report %>
-      </dd>
-
-      <dt>
-        Winning team
-      </dt>
-      <dd>
-        <%= @the_event.winning_team %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_event.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_event.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-
-
-
-<% if @current_user != nil && @current_user.id == @the_event.creator_id %>
-
+     <div>
   <div>
-  <div>
+    
+  <% if @current_user != nil && @current_user.id == @the_event.creator_id %>
     <h2>
       Edit event
     </h2>
@@ -221,9 +188,10 @@
         Update event
       </button>
     </form>
+    <%end%>
   </div>
 </div>
 
-<% end %>
 
-<hr>
+  </div>
+</div>
