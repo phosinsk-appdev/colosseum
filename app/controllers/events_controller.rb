@@ -31,6 +31,8 @@ class EventsController < ApplicationController
 
     @funds_raised = @the_event.donations.sum(:donation)
 
+    @your_funds_raised = @the_event.donations.where(donator_id: @current_user.id).sum(:donation)
+
     render({ :template => "events/show.html.erb" })
   end
 
