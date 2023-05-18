@@ -11,12 +11,14 @@
         </a>
       </div>
 
+<% if @current_user != nil && @current_user.id == @the_event.creator_id %>
       <div>
         <a href="/delete_event/<%= @the_event.id %>">
           Delete event
         </a>
       </div>
     </div>
+<%end%>
 
     <dl>
       <dt>
@@ -118,9 +120,7 @@
 
 
 
-<% if @current_user == nil %>
-
-  <% else %>
+<% if @current_user != nil && @current_user.id == @the_event.creator_id %>
 
   <div>
   <div>
@@ -128,7 +128,6 @@
       Edit event
     </h2>
 
-    <% if @current_user.id == @the_event.creator_id %>
     <form action="/modify_event/<%= @the_event.id %>"  method="post" >
       <div>
         <label for="title_box">
@@ -225,7 +224,6 @@
   </div>
 </div>
 
-<% end %>
 <% end %>
 
 <hr>
