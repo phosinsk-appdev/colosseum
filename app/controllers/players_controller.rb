@@ -38,6 +38,21 @@ class PlayersController < ApplicationController
 
     if the_player.valid?
       the_player.save
+
+      # add main game association to games_players table for simple look up
+      GamesPlayer.find_or_create_by(player_id: the_player.id, game_id: the_player.main_game)
+
+
+      # Associate additional games with player in games_players table
+      additional_games = params.fetch("query_additional_games", []).map(&:to_i)
+   
+      # Remove the main game from additional games if it's there
+      additional_games = additional_games - [the_player.main_game]
+
+      additional_games.each do |game_id|
+      GamesPlayer.create(player_id: the_player.id, game_id: game_id)
+      end
+
       redirect_to("/players", { :notice => "Player created successfully." })
     else
       redirect_to("/players", { :alert => the_player.errors.full_messages.to_sentence })

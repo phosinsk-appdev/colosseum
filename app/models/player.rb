@@ -32,5 +32,6 @@ class Player < ApplicationRecord
   belongs_to(:main, { :required => true, :class_name => "Game", :foreign_key => "main_game" })
 
   has_many(:events, { :through => :events_players, :source => :event })
+  has_many(:games, { :through => :games_players, :source => :game })
 
 end

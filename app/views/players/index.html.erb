@@ -46,13 +46,25 @@
 
         <select name="query_main_game" id="main_game_box">
 
+          <% @list_of_games.each do |a_game| %>
+            <option value="<%= a_game.id %>">
+              <%= a_game.title %>
+            </option>
+          <%end%>
+        </select>
+      </div>
+
+      <!-- Additional Games -->
+      <label for="additional_games_box">
+        (Optional) Also plays?
+      </label>
+      <select name="query_additional_games[]" id="additional_games_box" multiple>
         <% @list_of_games.each do |a_game| %>
           <option value="<%= a_game.id %>">
             <%= a_game.title %>
           </option>
-        <%end%>
-        </select>
-      </div>
+        <% end %>
+      </select>
 
       <div>
         <label for="event_minimum_box">
@@ -144,39 +156,39 @@
         </th>
 
         <th>
-         Show Details
+          Show Details
         </th>
       </tr>
 
       <% @list_of_players.each do |a_player| %>
-      <tr>
+        <tr>
 
-        <td>
-          <%= a_player.nickname %>
-        </td>
+          <td>
+            <%= a_player.nickname %>
+          </td>
 
-        <td>
-          <%= a_player.dob %>
-        </td>
+          <td>
+            <%= a_player.dob %>
+          </td>
 
-        <td>
-          <%= a_player.bio %>
-        </td>
+          <td>
+            <%= a_player.bio %>
+          </td>
 
-        <td>
-          <%= a_player.main.title %>
-        </td>
+          <td>
+            <%= a_player.main.title %>
+          </td>
 
-        <td>
-          <%= a_player.event_minimum %>
-        </td>
+          <td>
+            <%= a_player.event_minimum %>
+          </td>
 
-        <td>
-          <a href="/players/<%= a_player.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          <td>
+            <a href="/players/<%= a_player.id %>">
+              Show details
+            </a>
+          </td>
+        </tr>
       <% end %>
     </table>
   </div>
