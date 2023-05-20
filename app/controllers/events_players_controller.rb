@@ -21,7 +21,16 @@ def add_player # DO THESE NEED TO BE SEPARATE? IS ONE REALLY FOR UPDATE?
 
   @event_id = params.fetch("path_id")
   @event = Event.where({ :id => @event_id }).at(0)
-  @list_of_players = Player.all.order(nickname: :asc)
+  @game_id = @event.game_id
+
+  all_players = Player.all.order(nickname: :asc)
+  this_game_players_ids = GamesPlayer.where({ :game_id => @game_id }).pluck(:player_id)
+  
+  @players_of_this_game = all_players.select { |player| this_game_players_ids.include?(player.id) }
+  @other_players = all_players - @players_of_this_game
+
+
+  # @list_of_players = Player.all.order(nickname: :asc)
   @teams = [1,2]
 
   @event_players = EventsPlayer.where({ :event_id => @event_id })
