@@ -11,9 +11,21 @@ class EventsController < ApplicationController
 
     @list_of_games = matching_games.order({ :title => :asc })
    
-    matching_events = Event.all
+    filter = params[:filter]
 
-    @list_of_events = matching_events.order({ :created_at => :desc })
+    if filter == 'funded_upcoming'
+      @list_of_events = Event.where(:status => "funded").order({:created_at => :desc})
+      @table_header = "Upcoming Events"
+    elsif filter == 'past'
+      @list_of_events = Event.where(:status => "complete").order({:created_at => :desc})
+      @table_header = "Past Events"
+    elsif filter == 'so_close'
+      @list_of_events = Event.nearly_funded.order({:created_at => :desc})
+      @table_header = "So Close! Let's Make These Events Happen!"
+    else
+      @list_of_events = Event.all.order({ :created_at => :desc})
+      @table_header = "All Events"
+    end
 
     render({ :template => "events/index.html.erb" })
   end

@@ -40,6 +40,12 @@ class Event < ApplicationRecord
     end
   end
 
+  def self.nearly_funded
+    joins(:donations)
+      .group('events.id')
+      .having('SUM(donations.donation) / events.funding_target >= 0.8 AND SUM(donations.donation) / events.funding_target < 1')
+  end
+
   # association accessors
   has_many(:donations, { :class_name => "Donation", :foreign_key => "event_id" })
   has_many(:events_players, { :class_name => "EventsPlayer", :foreign_key => "event_id", :dependent => :destroy })
