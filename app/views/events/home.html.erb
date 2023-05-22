@@ -1,1 +1,92 @@
 <h1> Welcome to the Colosseum! </h1>
+<h3> Many will enter, many will win </h3>
+
+<center>
+<%= image_tag("colosseum.png", size: "500x200")%>
+</center>
+
+<hr></hr>
+
+<h2> Event Highlights </h2>
+
+<div style="display: flex; justify-content: space-around;">
+  <% [@funded_events, @nearly_funded_events, @past_events].zip(['Upcoming Events', 'Nearly Funded Events', 'Recent Events']).each do |events, header| %>
+    <div style="width: 30%;">
+      <h3><%= header %></h3>
+      <table border="1">
+        <tr>
+          <th>Title</th>
+          <th>Game</th>
+          <th>Description</th>
+          <th>Funding Goal</th>
+          <th>Funds Raised</th>
+          <th>Target Date</th>
+          <th>Show Details</th>
+        </tr>
+
+        <% events.each do |an_event| %>
+          <tr>
+            <td><%= an_event.title %></td>
+            <td><%= an_event.game.title %></td>
+            <td><%= an_event.description %></td>
+            <td><%= an_event.funding_target %></td>
+            <td><%= an_event.donations.sum(:donation) %></td>
+            <td><%= an_event.date_target %></td>
+            <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<hr></hr>
+
+<h2> About Us </h2>
+
+<p>Colosseum is an all or nothing crowdfunding platform that connects online streamers directly with their fans' ideas / proposals as monetizable opportunities. This decentralized crowdfunding/matchmaking platform empowers passionate and creative consumers to create and fund the viewing experiences they desire, while at the same time curating a market of paid opportunities for streamers / content creators. </p>
+
+<p> As a streamer, you now have incredibly direct and transparent access to the voice of your customers and have opportunities to be paid as a commissioned artist for your work even before your downstream viewership stats are factored in. </p>
+
+<p> And as a consumer, you are provided a channel through which you can ideate, crowdfund, and ultimately bring to life the exact content you desire. No more sitting around waiting for next year's big tournament, or hoping your two favorite players cross paths. </p>
+
+<p> To join our community of fans, simply sign up above. To join Colosseum as one of our player champions, <a href="mailto:support@colosseum.com">send us an email</a> at support@colosseum.com.  </p>
+
+
+ 
+
+
+
+
+</p>
+
+
+
+<hr></hr>
+
+<div style="display: flex; justify-content: space-around; margin-top: 40px;">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <h3> Twitch </h3>
+    <p> Join us on Twitch! </p>
+    <%= image_tag("twitch.png", size: "100x100") %>
+    <%= link_to "Follow us on Twitch", "https://www.twitch.tv/colosseum", target: "_blank" %>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center;"> 
+    <h3> YouTube </h3>
+    <p> Check out our YouTube channel! </p>
+    <%= image_tag("youtube.png", size: "100x100") %>
+    <%= link_to "Subscribe on YouTube", "https://www.youtube.com/colosseum", target: "_blank" %>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <h3> Discord </h3>
+    <p> Join our Discord community! </p>
+    <%= image_tag("discord.png", size: "100x100") %>
+    <%= link_to "Join us on Discord", "https://discord.com/invite/colosseum", target: "_blank" %>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <h3> Twitter </h3>
+    <p> Follow us on Twitter! </p>
+    <%= image_tag("twitter.png", size: "100x100") %>
+    <%= link_to "Follow us on Twitter", "https://twitter.com/colosseum", target: "_blank" %>
+  </div>
+</div>

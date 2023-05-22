@@ -108,99 +108,119 @@
 
 <hr>
 
+<% if @current_user&.admin? %>
 
 <div>
   <div>
-    <h2>
-      Edit player
-    </h2>
+<h2>
+  Edit player
+</h2>
 
-    <form action="/modify_player/<%= @the_player.id %>"  method="post" >
-      <div>
-        <label for="nickname_box">
-          Nickname
-        </label>
+<form action="/modify_player/<%= @the_player.id %>" method="post">
+  <div>
+    <label for="nickname_box">
+      Nickname
+    </label>
+    <input type="text" id="nickname_box" name="query_nickname" value="<%= @the_player.nickname %>">
+  </div>
 
-        <input type="text" id="nickname_box" name="query_nickname" value="<%= @the_player.nickname %>">
-      </div>
+  <div>
+    <label for="dob_box">
+      Dob
+    </label>
+    <input type="date" id="dob_box" name="query_dob" value="<%= @the_player.dob %>">
+  </div>
 
-      <div>
-        <label for="dob_box">
-          Dob
-        </label>
+  <div>
+    <label for="bio_box">
+      Bio
+    </label>
+    <textarea id="bio_box" name="query_bio"><%= @the_player.bio %></textarea>
+  </div>
 
-        <input type="date" id="dob_box" name="query_dob" value="<%= @the_player.dob %>">
-      </div>
+  <div>
+    <label for="main_game_box">
+      Primarily plays?
+    </label>
+    <select name="query_main_game" id="main_game_box">
+      <% @list_of_games.each do |a_game| %>
+        <option value="<%= a_game.id %>" <%= 'selected' if @the_player.main_game == a_game.id %> >
+          <%= a_game.title %>
+        </option>
+      <% end %>
+    </select>
+  </div>
 
-      <div>
-        <label for="bio_box">
-          Bio
-        </label>
 
-        <textarea id="bio_box" name="query_bio"><%= @the_player.bio %></textarea>
-      </div>
+  <!-- Additional Games -->
+  <label for="additional_games_box">
+    (Optional) Also plays?
+  </label>
+  <select name="query_additional_games[]" id="additional_games_box" multiple>
+    <% @list_of_games.each do |a_game| %>
+      <option value="<%= a_game.id %>" <%= 'selected' if @the_player.games.include?(a_game) %> >
+        <%= a_game.title %>
+      </option>
+    <% end %>
+  </select>
 
-      <div>
-        <label for="event_minimum_box">
-          Event minimum
-        </label>
+  <div>
+    <label for="event_minimum_box">
+      Event minimum
+    </label>
+    <input type="text" id="event_minimum_box" name="query_event_minimum" value="<%= @the_player.event_minimum %>">
+  </div>
 
-        <input type="text" id="event_minimum_box" name="query_event_minimum" value="<%= @the_player.event_minimum %>">
-      </div>
+  <div>
+    <label for="email_box">
+      Email
+    </label>
+    <input type="text" id="email_box" name="query_email" value="<%= @the_player.email %>">
+  </div>
 
-      <div>
-        <label for="email_box">
-          Email
-        </label>
+  <div>
+    <label for="phone_number_box">
+      Phone number
+    </label>
+    <input type="text" id="phone_number_box" name="query_phone_number" value="<%= @the_player.phone_number %>">
+  </div>
 
-        <input type="text" id="email_box" name="query_email" value="<%= @the_player.email %>">
-      </div>
+  <div>
+    <label for="twitch_box">
+      Twitch
+    </label>
+    <input type="text" id="twitch_box" name="query_twitch" value="<%= @the_player.social_one %>">
+  </div>
 
-      <div>
-        <label for="phone_number_box">
-          Phone number
-        </label>
+  <div>
+    <label for="youtube_box">
+      YouTube
+    </label>
+    <input type="text" id="youtube_box" name="query_youtube" value="<%= @the_player.social_two %>">
+  </div>
 
-        <input type="text" id="phone_number_box" name="query_phone_number" value="<%= @the_player.phone_number %>">
-      </div>
+  <div>
+    <label for="twitter_box">
+      Twitter
+    </label>
+    <input type="text" id="twitter_box" name="query_twitter" value="<%= @the_player.social_three %>">
+  </div>
 
-      <div>
-        <label for="social_one_box">
-          Social one
-        </label>
+  <div>
+    <label for="liquipedia_box">
+      Liquipedia
+    </label>
+    <input type="text" id="liquipedia_box" name="query_liquipedia" value="<%= @the_player.social_four %>">
+  </div>
 
-        <input type="text" id="social_one_box" name="query_social_one" value="<%= @the_player.social_one %>">
-      </div>
+  <button>
+    Update player
+  </button>
+</form>
 
-      <div>
-        <label for="social_two_box">
-          Social two
-        </label>
-
-        <input type="text" id="social_two_box" name="query_social_two" value="<%= @the_player.social_two %>">
-      </div>
-
-      <div>
-        <label for="social_three_box">
-          Social three
-        </label>
-
-        <input type="text" id="social_three_box" name="query_social_three" value="<%= @the_player.social_three %>">
-      </div>
-
-      <div>
-        <label for="social_four_box">
-          Social four
-        </label>
-
-        <input type="text" id="social_four_box" name="query_social_four" value="<%= @the_player.social_four %>">
-      </div>
-
-      <button>
-        Update player
-      </button>
-    </form>
   </div>
 </div>
+
+<% end %>
 
 <hr>

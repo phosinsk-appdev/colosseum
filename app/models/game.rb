@@ -26,5 +26,10 @@ class Game < ApplicationRecord
   has_many(:events, { :class_name => "Event", :foreign_key => "game_id", :dependent => :destroy })
   has_many(:games_players, { :class_name => "GamesPlayer", :foreign_key => "game_id", :dependent => :destroy })
   has_many(:players, { :class_name => "Player", :foreign_key => "main_game", :dependent => :destroy })
-  
+  has_many(:my_players, { :through => :games_players, :source => :player })
+
+  # establish array of values for genre drop-down
+
+    GENRES = ['Action', 'Adventure', 'Battle Royale', 'Fighting', 'First Person Shooter', 'MMORPG', 'MOBA', 'Puzzle', 'Racing', 'RPG', 'RTS', 'Simulation', 'Strategy', 'Sports', 'Third Person Shooter'].freeze
+    
 end

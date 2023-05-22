@@ -51,7 +51,7 @@
         Image
       </dt>
       <dd>
-        <%= @the_game.image %>
+        <img src="<%=@the_game.image%>" class="myimages">
       </dd>
 
       <dt>
@@ -97,12 +97,15 @@
       </div>
 
       <div>
-        <label for="genre_box">
-          Genre
-        </label>
-
-        <input type="text" id="genre_box" name="query_genre" value="<%= @the_game.genre %>">
-      </div>
+        <label for="genre_box">Genre</label>
+        <select name="query_genre" id="genre_box">
+          <% @genres.each do |a_genre| %>
+            <option <%= 'selected' if @the_game&.genre == a_genre %>>
+        <%= a_genre %>
+      </option>
+            <% end %>
+          </select>
+        </div>
 
       <div>
         <label for="release_date_box">

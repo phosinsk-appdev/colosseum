@@ -8,6 +8,8 @@
 
 <hr>
 
+<% if @current_user&.admin? %>
+
 <div>
   <div>
     <h2>
@@ -128,6 +130,8 @@
     </form>
   </div>
 </div>
+
+<% end %>
 
 <hr>
 <div>

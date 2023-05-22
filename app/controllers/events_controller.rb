@@ -2,6 +2,13 @@ class EventsController < ApplicationController
   
   def home
 
+     # pull first 10 rows and create instance variables for "teaser" tables on home page
+      @funded_events = Event.where(:status => "funded").order({:created_at => :desc}).limit(10)
+
+      @past_events = Event.where(:status => "complete").order({:created_at => :desc}).limit(10)
+
+      @nearly_funded_events = Event.nearly_funded.order({:created_at => :desc}).limit(10)
+
     render({ :template => "events/home.html.erb" })
 
   end
@@ -37,13 +44,21 @@ class EventsController < ApplicationController
 
     @the_event = matching_events.at(0)
 
+    matching_games = Game.all
+
+    @list_of_games = matching_games.order({ :title => :asc })
+
     @game = @the_event.game
 
     @creator = User.where(:id => @the_event.creator_id)
 
     @funds_raised = @the_event.donations.sum(:donation)
 
+    if @current_user != nil
     @your_funds_raised = @the_event.donations.where(donator_id: @current_user.id).sum(:donation)
+    end
+
+    @teams = [1,2]
 
     render({ :template => "events/show.html.erb" })
   end

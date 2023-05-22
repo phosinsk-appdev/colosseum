@@ -1,4 +1,11 @@
 class GamesController < ApplicationController
+  
+  before_action :set_genres
+
+  def set_genres
+    @genres = Game::GENRES
+  end
+  
   def index
     matching_games = Game.all
 
@@ -18,6 +25,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    
     the_game = Game.new
     the_game.title = params.fetch("query_title")
     the_game.release_date = params.fetch("query_release_date")

@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+  
+  before_action :ensure_admin!, only: [:create, :update, :destroy]
+  
   def index
     
     matching_games = Game.all
@@ -18,6 +21,10 @@ class PlayersController < ApplicationController
     matching_players = Player.where({ :id => the_id })
 
     @the_player = matching_players.at(0)
+
+    matching_games = Game.all
+
+    @list_of_games = matching_games.order({ :title => :asc })
 
     render({ :template => "players/show.html.erb" })
   end
