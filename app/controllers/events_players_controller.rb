@@ -29,8 +29,6 @@ def add_player # DO THESE NEED TO BE SEPARATE? IS ONE REALLY FOR UPDATE?
   @players_of_this_game = all_players.select { |player| this_game_players_ids.include?(player.id) }
   @other_players = all_players - @players_of_this_game
 
-
-  # @list_of_players = Player.all.order(nickname: :asc)
   @teams = [1,2]
 
   @event_players = EventsPlayer.where({ :event_id => @event_id })
@@ -62,21 +60,6 @@ def remove_player
 end
 
 end
-
-
-  # def create
-  #   the_events_player = EventsPlayer.new
-  #   the_events_player.event_id = params.fetch("query_event_id")
-  #   the_events_player.team = params.fetch("query_team")
-  #   the_events_player.player_id = params.fetch("query_player_id")
-
-  #   if the_events_player.valid?
-  #     the_events_player.save
-  #     redirect_to("/events_players", { :notice => "Events player created successfully." })
-  #   else
-  #     redirect_to("/events_players", { :alert => the_events_player.errors.full_messages.to_sentence })
-  #   end
-  # end
 
   def update
     the_id = params.fetch("path_id")

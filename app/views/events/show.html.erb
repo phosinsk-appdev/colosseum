@@ -8,7 +8,7 @@
       <a href="/events">Go back</a>
     </div>
 
-    <% if @current_user != nil && @current_user.id == @the_event.creator_id %>
+     <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
       <div>
         <a href="/delete_event/<%= @the_event.id %>">Delete event</a>
       </div>
@@ -85,10 +85,15 @@
   <div>
     
   <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
+    
+    <div>
     <h2>
       Edit event
     </h2>
+    <p><i>Note: If you need to edit the players / teams involved in this event, please delete the event and create a new one.</i></p>
+    </div>
 
+<div>
     <form action="/modify_event/<%= @the_event.id %>"  method="post" >
       <div>
         <label for="title_box">
@@ -128,6 +133,10 @@
         </label>
 
         <input type="date" id="date_deadline_box" name="query_date_deadline" value="<%= @the_event.date_deadline %>">
+      </div>
+
+      <div>
+        <input type="hidden" id="creator_id_box" name="query_creator_id" value="<%= @the_event.creator_id %>">
       </div>
 
       <div>
