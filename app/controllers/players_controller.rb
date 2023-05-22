@@ -8,7 +8,14 @@ class PlayersController < ApplicationController
 
     @list_of_games = matching_games.order({ :title => :asc })
    
-    matching_players = Player.all
+    game_id = params.fetch("query_game_id", nil)
+  
+    if game_id.blank?
+      matching_players = Player.all
+    else
+      # Fetch players who have the game in their games
+      matching_players = Player.where({:main_game => game_id})
+    end
 
     @list_of_players = matching_players.order({ :nickname => :asc })
 

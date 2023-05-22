@@ -130,10 +130,37 @@
     </form>
   </div>
 </div>
-
+<hr>
 <% end %>
 
-<hr>
+
+<!-- Give users the ability to filter the players table by main game-->
+<div align="right">
+<% if @list_of_games.present? %>
+  <form action="/players/filter_by_game" method="get">
+    <label for="game_id_box">Filter by Game</label>
+    <select id="game_id_box" name="query_game_id">
+      <!-- Include an "ALL" option for clearing the filter -->
+      <option value="">ALL</option>
+      <% @list_of_games.each do |a_game| %>
+        <!-- Use the 'selected' attribute to maintain the selected game after filter -->
+        <option value="<%= a_game.id %>" <%= 'selected' if a_game.id.to_s == params[:query_game_id] %>>
+          <%= a_game.title %>
+        </option>
+      <% end %>
+    </select>
+    <button type="submit">Filter</button>
+    <% if params[:query_game_id].present? %>
+      <!-- 'Clear Filters' button, conditionally displayed when a filter is active -->
+      <a href="/players">
+        <button type="button">Clear Filters</button>
+      </a>
+    <% end %>
+  </form>
+<% end %>
+</div>
+
+
 <div>
   <div>
     <table border="1">

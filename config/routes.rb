@@ -55,6 +55,11 @@ Rails.application.routes.draw do
           
   # READ
   get("/players", { :controller => "players", :action => "index" })
+
+  # filter players by game
+
+  get("/players/filter_by_game", { :controller => "players", :action => "index" })
+
   
   get("/players/:path_id", { :controller => "players", :action => "show" })
   
