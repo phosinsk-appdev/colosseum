@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Player #<%= @the_player.id %> details
+      <%= @the_player.nickname %>'s details
     </h1>
 
     <div>
@@ -62,31 +62,31 @@
       </dd>
 
       <dt>
-        Social one
+        Twitch
       </dt>
       <dd>
-        <%= @the_player.social_one %>
+        <a href="<%= @the_player.social_one %>" target="_blank"> Watch <%=@the_player.nickname%> on Twitch </a>
       </dd>
 
       <dt>
-        Social two
+        YouTube
       </dt>
       <dd>
-        <%= @the_player.social_two %>
+        <a href="<%= @the_player.social_two %>" target="_blank"> Watch <%=@the_player.nickname%> on YouTube </a>
       </dd>
 
       <dt>
-        Social three
+        Twitter
       </dt>
       <dd>
-        <%= @the_player.social_three %>
+        <a href="<%= @the_player.social_three %>" target="_blank"> Follow <%=@the_player.nickname%> on Twitter </a>
       </dd>
 
       <dt>
-        Social four
+        Liquipedia
       </dt>
       <dd>
-        <%= @the_player.social_four %>
+        <a href="<%= @the_player.social_four %>" target="_blank"> Read up on <%=@the_player.nickname%> on Liquipedia </a>
       </dd>
 
       <dt>
