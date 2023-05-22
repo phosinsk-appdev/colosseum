@@ -53,7 +53,7 @@ class Event < ApplicationRecord
 
   def winning_team_check
     if winning_team.present? && !(["funded", "complete"].include? status)
-      errors.add(:winning_team, "can only be set if the event is fully funded")
+      errors.add(:winning_team, "can only be set after the event is fully funded and has taken place.")
     end
   end
 

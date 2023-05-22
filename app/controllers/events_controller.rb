@@ -2,12 +2,12 @@ class EventsController < ApplicationController
   
   def home
 
-     # pull first 10 rows and create instance variables for "teaser" tables on home page
-      @funded_events = Event.where(:status => "funded").order({:created_at => :desc}).limit(10)
+     # pull first 5 rows and create instance variables for "teaser" tables on home page
+      @funded_events = Event.where(:status => "funded").order({:created_at => :desc}).limit(5)
 
-      @past_events = Event.where(:status => "complete").order({:created_at => :desc}).limit(10)
+      @past_events = Event.where(:status => "complete").order({:created_at => :desc}).limit(5)
 
-      @nearly_funded_events = Event.nearly_funded.order({:created_at => :desc}).limit(10)
+      @nearly_funded_events = Event.nearly_funded.order({:created_at => :desc}).limit(5)
 
     render({ :template => "events/home.html.erb" })
 
@@ -97,9 +97,9 @@ class EventsController < ApplicationController
     # the_event.status = params.fetch("query_status")
     the_event.creator_id = params.fetch("query_creator_id")
     the_event.game_id = params.fetch("query_game_id")
-    # the_event.watch_details = params.fetch("query_watch_details")
-    # the_event.battle_report = params.fetch("query_battle_report")
-    # the_event.winning_team = params.fetch("query_winning_team")
+    the_event.watch_details = params.fetch("query_watch_details")
+    the_event.battle_report = params.fetch("query_battle_report")
+    the_event.winning_team = params.fetch("query_winning_team_id")
 
     if the_event.valid?
       the_event.save

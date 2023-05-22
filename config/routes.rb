@@ -140,6 +140,8 @@ Rails.application.routes.draw do
   post("/events_players/:path_id/add_player", { :controller => "events_players", :action => "insert_player"})
   post("/events_players/:path_id/remove", { :controller => "events_players", :action => "remove_player"})
 
+  post("/events_players/:path_id/validate_teams_and_proceed_to_funding", { :controller => "events_players", :action => "validate_teams_and_proceed_to_funding" })
+
 
   # CREATE
   # post("/insert_events_player", { :controller => "events_players", :action => "create" })

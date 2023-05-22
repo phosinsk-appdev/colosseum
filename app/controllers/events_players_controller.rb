@@ -37,6 +37,16 @@ def add_player # DO THESE NEED TO BE SEPARATE? IS ONE REALLY FOR UPDATE?
 
 end
 
+def validate_teams_and_proceed_to_funding
+  @event = Event.find(params[:path_id])
+  if @event.events_players.exists?(team: 1) && @event.events_players.exists?(team: 2)
+    redirect_to("/events/#{@event.id}/set_funding_target")
+  else
+    redirect_to("/events_players/#{@event.id}/add_player", { :alert => "Each team must have at least one player." })
+
+  end
+end
+
 def insert_player
   the_events_player = EventsPlayer.new
   the_events_player.event_id = params.fetch("path_id")
