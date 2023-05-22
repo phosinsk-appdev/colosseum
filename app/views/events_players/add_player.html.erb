@@ -8,12 +8,23 @@
       </label>
 
       <select name="query_player_id" id="player_id_box">
+      <optgroup label="Players who play this game">
 
-        <% @list_of_players.each do |a_player| %>
+        <% @players_of_this_game.each do |a_player| %>
+        
           <option value="<%= a_player.id %>">
             <%= a_player.nickname %>
           </option>
         <%end%>
+        </optgroup>
+            <optgroup label="All Players">
+      <% @other_players.each do |a_player| %>
+        <option value="<%= a_player.id %>">
+          <%= a_player.nickname %>
+        </option>
+      <%end%>
+    </optgroup>
+
       </select>
     </div>
 
