@@ -33,6 +33,13 @@ class PlayersController < ApplicationController
 
     @list_of_games = matching_games.order({ :title => :asc })
 
+    #calculate wins, losses, and earnings
+
+    @event_history = @the_player.event_history
+    @the_player_wins = @the_player.calculate_total_wins
+    @the_player_earnings = @the_player.calculate_total_earnings
+    @the_player_losses = @event_history.count - @the_player_wins
+
     render({ :template => "players/show.html.erb" })
   end
 

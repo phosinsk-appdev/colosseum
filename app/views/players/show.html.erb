@@ -89,22 +89,53 @@
         <a href="<%= @the_player.social_four %>" target="_blank"> Read up on <%=@the_player.nickname%> on Liquipedia </a>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_player.created_at) %> ago
-      </dd>
+<hr>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_player.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
+ <!-- Display total wins and earnings -->
+    <div>
+      <h2><%= @the_player.nickname %>'s Record</h2>
+      <p>Wins: <%= @the_player_wins %></p>
+      <p>Losses: <%= @the_player_losses %></p>
+    </div>
+
+    <div>
+      <h3>Total Earnings</h3>
+      <p><%= number_to_currency(@the_player_earnings) %></p>
+    </div>
+
+<hr>
+
+<h2><%= @the_player.nickname %>'s Event History</h2>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Win/Loss</th>
+      <th>Title</th>
+      <th>Game</th>
+      <th>Funding Goal</th>
+      <th>Description</th>
+      <th>Winning Team</th>
+      <th>Losing Team</th>
+      <th>Earnings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @the_player.event_history_table.each do |row| %>
+      <tr>
+        <td><%= row["Win/Loss"] %></td>
+        <td><%= row["Title"] %></td>
+        <td><%= row["Game"] %></td>
+        <td><%= row["Funding Goal"] %></td>
+        <td><%= row["Description"] %></td>
+        <td><%= row["Winning Team"] %></td>
+        <td><%= row["Losing Team"] %></td>
+        <td><%= number_to_currency(row["Earnings"]) %></td> <!-- Use the number_to_currency helper to format the earnings -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <hr>
 
