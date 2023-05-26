@@ -25,11 +25,11 @@
       </tr>
       <tr>
         <th>Date target</th>
-        <td><%= @the_event.date_target %></td>
+        <td><%= @the_event.date_target.strftime('%m/%d/%y') %></td>
       </tr>
       <tr>
         <th>Date deadline</th>
-        <td><%= @the_event.date_deadline %></td>
+        <td><%= @the_event.date_deadline.strftime('%m/%d/%y') %></td>
       </tr>
       <tr>
         <th>Game</th>
@@ -179,8 +179,8 @@
   <select name="query_winning_team_id" id="winning_team_box">
     <option value=""></option>
     <% (1..2).each do |team| %>
-      <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team %>>
-        Team <%= team %>: <%= EventsPlayer.where(event_id: @the_event.id, team: team).map { |ep| Player.find(ep.player_id).nickname }.join(", ") %>
+      <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team.to_s %>>
+        Team <%= team %>: <%= @the_event.winning_team_nicks[team.to_s].join(", ") %>
       </option>
     <% end %>
   </select>

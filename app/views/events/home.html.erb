@@ -10,34 +10,87 @@
 <h2> Event Highlights </h2>
 
 <div style="display: flex; justify-content: space-around;">
-  <% [@funded_events, @nearly_funded_events, @past_events].zip(['Upcoming Events', 'Nearly Funded Events', 'Recent Events']).each do |events, header| %>
-    <div style="width: 30%;">
-      <h3><%= header %></h3>
-      <table border="1">
-        <tr>
-          <th>Title</th>
-          <th>Game</th>
-          <th>Description</th>
-          <th>Funding Goal</th>
-          <th>Funds Raised</th>
-          <th>Target Date</th>
-          <th>Show Details</th>
-        </tr>
+  
+  <!-- Funded Events -->
+  <div style="width: 30%;">
+    <h3>Upcoming Events</h3>
+    <table border="1">
+      <tr>
+        <th>Title</th>
+        <th>Game</th>
+        <th>Funding Goal</th>
+        <th>Funds Raised</th>
+        <th>Target Date</th>
+        <th>Show Details</th>
+      </tr>
 
-        <% events.each do |an_event| %>
-          <tr>
-            <td><%= an_event.title %></td>
-            <td><%= an_event.game.title %></td>
-            <td><%= an_event.description %></td>
-            <td><%= an_event.funding_target %></td>
-            <td><%= an_event.donations.sum(:donation) %></td>
-            <td><%= an_event.date_target %></td>
-            <td><a href="/events/<%= an_event.id %>">Show details</a></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+      <% @funded_events.each do |an_event| %>
+        <tr>
+          <td><%= an_event.title %></td>
+          <td><%= an_event.game.title %></td>
+          <td><%= an_event.funding_target %></td>
+          <td><%= an_event.donations.sum(:donation) %></td>
+          <td><%= an_event.date_target.strftime('%m/%d/%y') %></td>
+          <td><a href="/events/<%= an_event.id %>">Details</a></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  
+  <!-- Nearly Funded Events -->
+  <div style="width: 30%;">
+    <h3>Nearly Funded Events</h3>
+    <table border="1">
+      <tr>
+        <th>Title</th>
+        <th>Game</th>
+        <th>Funding Goal</th>
+        <th>Funds Raised</th>
+        <th>Target Date</th>
+        <th>Show Details</th>
+      </tr>
+
+      <% @nearly_funded_events.each do |an_event| %>
+        <tr>
+          <td><%= an_event.title %></td>
+          <td><%= an_event.game.title %></td>
+          <td><%= an_event.funding_target %></td>
+          <td><%= an_event.donations.sum(:donation) %></td>
+          <td><%= an_event.date_target.strftime('%m/%d/%y') %></td>
+          <td><a href="/events/<%= an_event.id %>">Details</a></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <!-- Past Events -->
+  <div style="width: 30%;">
+    <h3>Recent Events</h3>
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Game</th>
+    <th>Description</th>
+    <th>Funding Goal</th>
+    <th>Funds Raised</th>
+    <th>Winning Team</th>
+    <th>Show Details</th>
+  </tr>
+
+  <% @past_events.each do |an_event| %>
+    <tr>
+      <td><%= an_event.title %></td>
+      <td><%= an_event.game.title %></td>
+      <td><%= an_event.description %></td>
+      <td><%= an_event.funding_target %></td>
+      <td><%= an_event.donations.sum(:donation) %></td>
+      <td><%= an_event.winning_team.join(", ") %></td>
+      <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+    </tr>
   <% end %>
+</table>
+
+  </div>
 </div>
 
 <hr></hr>
