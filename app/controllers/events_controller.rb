@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     matching_games = Game.all
 
     @list_of_games = matching_games.order({ :title => :asc })
-   
+ 
     filter = params[:filter]
 
     if filter == 'funded_upcoming'
@@ -36,6 +36,24 @@ class EventsController < ApplicationController
 
     render({ :template => "events/index.html.erb" })
   end
+
+  def filter_by_game
+    @list_of_games = Game.all.order({ :title => :asc })
+    
+    query_game_id = params[:query_game_id]
+  
+    if query_game_id.blank?
+      @list_of_events = Event.all
+    else
+      game = Game.find(query_game_id)
+      @list_of_events = game.events
+      @table_header = "#{game.title} Events"
+    end
+  
+    render({ :template => "events/index.html.erb" })
+  end
+  
+  
 
   def show
     the_id = params.fetch("path_id")

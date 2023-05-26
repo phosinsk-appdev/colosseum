@@ -80,11 +80,42 @@
 <h3> <%= @table_header %> </h3>
 
 <div> 
-    <a href="/events?filter=all">All Events</a>  |  
-    <a href="/events?filter=funded_upcoming">Upcoming Events</a>  |  
-    <a href="/events?filter=so_close">So Close! Events</a>  | 
-    <a href="/events?filter=past">Past Events</a>
+  <div style="float: left;"> 
+      <a href="/events?filter=all">All Events</a>  |  
+      <a href="/events?filter=funded_upcoming">Upcoming Events</a>  |  
+      <a href="/events?filter=so_close">So Close! Events</a>  | 
+      <a href="/events?filter=past">Past Events</a>
+  </div>
+
+  <!-- Give users the ability to filter the events table by game -->
+  <div style="float: right;">
+  <% if @list_of_games.present? %>
+    <form action="/events/filter_by_game" method="get">
+      <label for="game_id_box">Filter by Game</label>
+      <select id="game_id_box" name="query_game_id">
+        <!-- Include an "ALL" option for clearing the filter -->
+        <option value="">ALL</option>
+        <% @list_of_games.each do |a_game| %>
+          <!-- Use the 'selected' attribute to maintain the selected game after filter -->
+          <option value="<%= a_game.id %>" <%= 'selected' if a_game.id.to_s == params[:query_game_id] %>>
+            <%= a_game.title %>
+          </option>
+        <% end %>
+      </select>
+      <button type="submit">Filter</button>
+      <% if params[:query_game_id].present? %>
+        <!-- 'Clear Filters' button, conditionally displayed when a filter is active -->
+        <a href="/events">
+          <button type="button">Clear Filters</button>
+        </a>
+      <% end %>
+    </form>
+  <% end %>
+  </div>
+
+  <div style="clear: both;"></div>
 </div>
+
 
 <hr>
 <div>
