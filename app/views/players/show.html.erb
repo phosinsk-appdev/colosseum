@@ -47,6 +47,8 @@
         <%= @the_player.event_minimum %>
       </dd>
 
+<% if @current_user&.admin? %>
+
       <dt>
         Email
       </dt>
@@ -60,6 +62,8 @@
       <dd>
         <%= @the_player.phone_number %>
       </dd>
+
+<% end %>
 
       <dt>
         Twitch

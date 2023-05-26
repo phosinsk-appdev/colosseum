@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       @list_of_events = Event.nearly_funded.order({:created_at => :desc})
       @table_header = "So Close! Let's Make These Events Happen!"
     else
-      @list_of_events = Event.all.order({ :created_at => :desc})
+      @list_of_events = Event.all.order({ :date_target => :asc})
       @table_header = "All Events"
     end
 
