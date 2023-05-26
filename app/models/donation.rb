@@ -27,10 +27,10 @@ class Donation < ApplicationRecord
 
   def update_event_status
     event = self.event
-    if event.status == "created" && event.donations.sum(:donation) > 0
-      event.update(status: "funding_in_progress")
-    elsif event.status == "funding_in_progress" && event.donations.sum(:donation) >= event.funding_target
+    if event.donations.sum(:donation) >= event.funding_target
       event.update(status: "funded")
+    elsif event.status == "created" && event.donations.sum(:donation) > 0
+      event.update(status: "funding_in_progress")
     end
   end
 

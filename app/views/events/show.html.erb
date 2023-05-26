@@ -171,20 +171,20 @@
         <textarea id="battle_report_box" name="query_battle_report"><%= @the_event.battle_report %></textarea>
       </div>
 
-      <div>
-        <label for="winning_team_box">
-          Winning Team
-        </label>
+<div>
+  <label for="winning_team_box">
+    Winning Team
+  </label>
 
-        <select name="query_winning_team_id" id="winning_team_box">
-          <option value=""></option>
-          <% @teams.each do |team| %>
-            <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team %>>
-              Team <%= team %>
-            </option>
-          <% end %>
-        </select>
-      </div>
+  <select name="query_winning_team_id" id="winning_team_box">
+    <option value=""></option>
+    <% (1..2).each do |team| %>
+      <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team %>>
+        Team <%= team %>: <%= EventsPlayer.where(event_id: @the_event.id, team: team).map { |ep| Player.find(ep.player_id).nickname }.join(", ") %>
+      </option>
+    <% end %>
+  </select>
+</div>
 
 
       <% end %>

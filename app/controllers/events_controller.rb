@@ -3,11 +3,11 @@ class EventsController < ApplicationController
   def home
 
      # pull first 5 rows and create instance variables for "teaser" tables on home page
-      @funded_events = Event.where(:status => "funded").order({:created_at => :desc}).limit(5)
+      @funded_events = Event.where(:status => "funded").order({:date_target => :asc}).limit(5)
 
-      @past_events = Event.where(:status => "complete").order({:created_at => :desc}).limit(5)
+      @past_events = Event.where(:status => "complete").order({:date_target => :desc}).limit(5)
 
-      @nearly_funded_events = Event.nearly_funded.order({:created_at => :desc}).limit(5)
+      @nearly_funded_events = Event.nearly_funded.order({:date_target => :asc}).limit(5)
 
     render({ :template => "events/home.html.erb" })
 
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       @list_of_events = Event.nearly_funded.order({:created_at => :desc})
       @table_header = "So Close! Let's Make These Events Happen!"
     else
-      @list_of_events = Event.all.order({ :date_target => :asc})
+      @list_of_events = Event.where.not(:status => "complete").order({ :date_target => :asc})
       @table_header = "All Events"
     end
 
@@ -46,7 +46,7 @@ class EventsController < ApplicationController
       @list_of_events = Event.all
     else
       game = Game.find(query_game_id)
-      @list_of_events = game.events
+      @list_of_events = game.events.where.not(:status => "complete")
       @table_header = "#{game.title} Events"
     end
   
