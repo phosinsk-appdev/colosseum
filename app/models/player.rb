@@ -110,8 +110,8 @@ class Player < ApplicationRecord
                 "Game" => event.game.title,
                 "Funding Goal" => event.funding_target,
                 "Description" => event.description,
-                "Winning Team" => "#{event.winning_team} (#{winning_team_nicknames})",
-                "Losing Team" => "#{team_number == event.winning_team ? team_number + 1 : team_number - 1} (#{losing_team_nicknames})",
+                "Winning Team" => "#{winning_team_nicknames}",
+                "Losing Team" => "#{losing_team_nicknames}",
                 "Earnings" => earnings
               }
         

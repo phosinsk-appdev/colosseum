@@ -2,7 +2,7 @@
 <h3> Many will enter, many will win </h3>
 
 <center>
-<%= image_tag("colosseum.png", size: "500x200")%>
+  <%= image_tag("colosseum.png", size: "500x200")%>
 </center>
 
 <hr></hr>
@@ -10,7 +10,7 @@
 <h2> Event Highlights </h2>
 
 <div style="display: flex; justify-content: space-around;">
-  
+
   <!-- Funded Events -->
   <div style="width: 30%;">
     <h3>Upcoming Events</h3>
@@ -36,7 +36,7 @@
       <% end %>
     </table>
   </div>
-  
+
   <!-- Nearly Funded Events -->
   <div style="width: 30%;">
     <h3>Nearly Funded Events</h3>
@@ -63,34 +63,36 @@
     </table>
   </div>
 
-  <!-- Past Events -->
-  <div style="width: 30%;">
-    <h3>Recent Events</h3>
-<table border="1">
-  <tr>
-    <th>Title</th>
-    <th>Game</th>
-    <th>Description</th>
-    <th>Funding Goal</th>
-    <th>Funds Raised</th>
-    <th>Winning Team</th>
-    <th>Show Details</th>
-  </tr>
-
-  <% @past_events.each do |an_event| %>
+<!-- Past Events -->
+<div style="width: 30%;">
+  <h3>Recent Events</h3>
+  <table border="1">
     <tr>
-      <td><%= an_event.title %></td>
-      <td><%= an_event.game.title %></td>
-      <td><%= an_event.description %></td>
-      <td><%= an_event.funding_target %></td>
-      <td><%= an_event.donations.sum(:donation) %></td>
-      <td><%= an_event.winning_team.join(", ") %></td>
-      <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+      <th>Title</th>
+      <th>Game</th>
+      <th>Funding Goal</th>
+      <th>Funds Raised</th>
+      <th>Winner(s)</th>
+      <th>Show Details</th>
     </tr>
-  <% end %>
-</table>
 
-  </div>
+    <% @past_events.each do |an_event| %>
+      <tr>
+        <td><%= an_event.title %></td>
+        <td><%= an_event.game.title %></td>
+        <td><%= an_event.funding_target %></td>
+        <td><%= an_event.donations.sum(:donation) %></td>
+        <td>
+          <% winning_players = EventsPlayer.where(event_id: an_event.id, team: an_event.winning_team).map { |ep| Player.find(ep.player_id).nickname } %>
+          <%= winning_players.join(', ') unless winning_players.empty? %>
+        </td>
+        <td><a href="/events/<%= an_event.id %>">Details</a></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+
 </div>
 
 <hr></hr>
@@ -105,15 +107,7 @@
 
 <p> To join our community of fans, simply sign up above. To join Colosseum as one of our player champions, <a href="mailto:support@colosseum.com">send us an email</a> at support@colosseum.com.  </p>
 
-
- 
-
-
-
-
 </p>
-
-
 
 <hr></hr>
 
@@ -124,7 +118,7 @@
     <%= image_tag("twitch.png", size: "100x100") %>
     <%= link_to "Follow us on Twitch", "https://www.twitch.tv/colosseum", target: "_blank" %>
   </div>
-  <div style="display: flex; flex-direction: column; align-items: center;"> 
+  <div style="display: flex; flex-direction: column; align-items: center;">
     <h3> YouTube </h3>
     <p> Check out our YouTube channel! </p>
     <%= image_tag("youtube.png", size: "100x100") %>

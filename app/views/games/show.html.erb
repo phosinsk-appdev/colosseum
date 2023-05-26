@@ -11,13 +11,14 @@
         </a>
       </div>
 
+<% if @current_user&.admin? %>
       <div>
         <a href="/delete_game/<%= @the_game.id %>">
           Delete game
         </a>
       </div>
     </div>
-
+<%end%>
     <dl>
       <dt>
         Title
@@ -61,25 +62,13 @@
         <%= @the_game.publisher %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_game.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_game.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
 
 <hr>
 
+<% if @current_user&.admin? %>
 
 <div>
   <div>
@@ -145,5 +134,5 @@
     </form>
   </div>
 </div>
-
 <hr>
+<%end%>

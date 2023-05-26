@@ -14,6 +14,10 @@
 #
 class Game < ApplicationRecord
 
+  # establish array of values for genre drop-down
+
+  GENRES = ['Action', 'Adventure', 'Battle Royale', 'Fighting', 'First Person Shooter', 'MMORPG', 'MOBA', 'Puzzle', 'Racing', 'RPG', 'RTS', 'Simulation', 'Strategy', 'Sports', 'Third Person Shooter'].freeze
+    
   # validations
   validates(:title, { :presence => { :message => "Please enter a title for this game." } })
   validates(:title, { :uniqueness => { :message => "A game by this title already exists." } })
@@ -28,8 +32,4 @@ class Game < ApplicationRecord
   has_many(:players, { :class_name => "Player", :foreign_key => "main_game", :dependent => :destroy })
   has_many(:my_players, { :through => :games_players, :source => :player })
 
-  # establish array of values for genre drop-down
-
-    GENRES = ['Action', 'Adventure', 'Battle Royale', 'Fighting', 'First Person Shooter', 'MMORPG', 'MOBA', 'Puzzle', 'Racing', 'RPG', 'RTS', 'Simulation', 'Strategy', 'Sports', 'Third Person Shooter'].freeze
-    
 end

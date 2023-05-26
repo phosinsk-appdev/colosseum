@@ -77,10 +77,6 @@ class Event < ApplicationRecord
       .having('SUM(donations.donation) / events.funding_target >= 0.8 AND SUM(donations.donation) / events.funding_target < 1')
   end
 
-  def winning_team
-    EventsPlayer.where(event_id: id, team: 'winning').map { |ep| Player.find(ep.player_id).nickname }
-  end
-
   # association accessors
   has_many(:donations, { :class_name => "Donation", :foreign_key => "event_id" })
   has_many(:events_players, { :class_name => "EventsPlayer", :foreign_key => "event_id", :dependent => :destroy })

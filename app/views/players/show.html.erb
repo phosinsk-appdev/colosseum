@@ -10,14 +10,14 @@
           Go back
         </a>
       </div>
-
+<% if @current_user&.admin? %>
       <div>
         <a href="/delete_player/<%= @the_player.id %>">
           Delete player
         </a>
       </div>
     </div>
-
+<%end%>
     <dl>
       <dt>
         Nickname

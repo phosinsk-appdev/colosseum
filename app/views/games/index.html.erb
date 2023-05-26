@@ -1,7 +1,5 @@
 <head>
 
-  <link rel="stylesheet" href="/my_styles.css">
-
 </head>
 
 <div>
@@ -13,6 +11,8 @@
 </div>
 
 <hr>
+
+<% if @current_user != nil %>
 
 <div>
   <div>
@@ -33,8 +33,7 @@
         <label for="genre_box">Genre</label>
         <select name="query_genre" id="genre_box">
           <% @genres.each do |a_genre| %>
-        <%= a_genre %>
-      </option>
+        <option><%= a_genre %> </option>
             <% end %>
           </select>
         </div>
@@ -77,8 +76,9 @@
       </form>
     </div>
   </div>
+ <hr>
+  <% end %>
 
-  <hr>
   <div>
     <div>
       <table border="1">
@@ -106,14 +106,6 @@
 
           <th>
             Publisher
-          </th>
-
-          <th>
-            Created at
-          </th>
-
-          <th>
-            Updated at
           </th>
 
           <th>
@@ -145,13 +137,6 @@
 
             <td>
               <%= a_game.publisher %>
-            </td>
-
-            <td>
-              <%= time_ago_in_words(a_game.created_at) %> ago
-            </td>
-            <td>
-              <%= time_ago_in_words(a_game.updated_at) %> ago
             </td>
 
             <td>

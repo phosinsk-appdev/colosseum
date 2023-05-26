@@ -1,6 +1,11 @@
 .myimages {
-   float: left;
-   width:  200px;
-   height: 200px;
-   background-size: cover;
+    display: inline-block;
+    width:  200px;
+    height: 200px;
+    background-size: cover;
   }
+
+  .navtable td a {
+   font-weight: bold;
+   padding: 50px;
+ }

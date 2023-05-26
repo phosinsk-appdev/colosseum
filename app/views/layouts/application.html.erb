@@ -13,31 +13,49 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
+    <link rel="stylesheet" type="text/css" href="/my_styles.css">
+
   </head>
 
-  <body>
+<body>
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f2f2f2;">
+    <div style="text-align: left;">
+      <table border="1" class="navtable">
+        <tr>
+          <td><a href="/">Home</a></td>
+          <td><a href="/events">Events</a></td>
+          <td><a href="/players">Players</a></td>
+          <td><a href="/games">Games</a></td>
+        </tr>
+      </table>
+    </div>
 
-    <table border="1">
-      
-      <tr>
-        <td><a href="/">Home</a></td>
-        <td><a href="/events">Events</a></td>
-        <td><a href="/players">Players</a></td>
-        <td><a href="/games">Games</a></td>
-      </tr>
-
-    </table>
-
-    <% if @current_user == nil %>
-      <ul style="list-style: none;">
-        <li> <a href="/user_sign_in"> Sign In </a> </li>
-        <li> <a href="/user_sign_up"> Sign Up </a> </li>
-      </ul>
-    <% else %>
-      <ul style="list-style: none;">
-        <li> Welcome, <%=@current_user.email.split('@').first%> <a href="/user_sign_out"> Sign Out </a> </li>
-      </ul>
-    <% end %>
+    <div style="text-align: right;">
+      <% if @current_user == nil %>
+        <table border="1">
+          <tbody>
+            <tr>
+              <td><a href="/user_sign_in">Sign In</a></td>
+            </tr>
+            <tr>
+              <td><a href="/user_sign_up">Sign Up</a></td>
+            </tr>
+          </tbody>
+        </table>
+      <% else %>
+        <table border="1">
+          <tbody>
+            <tr>
+              <td>Welcome, <%= @current_user.email.split('@').first.capitalize %></td>
+            </tr>
+            <tr>
+              <td><a href="/user_sign_out">Sign Out</a></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
 
     <p style="color: green"> <%= notice %> </p>
     <p style="color: red"> <%= alert %> </p>

@@ -1,19 +1,23 @@
 <div>
   <div>
-    <h1>
+      <% if @the_event.status == 'complete' %>
+        <h1>Completed Event Details</h1>
+      <%else%>
+      <h1>
       Event Details
-    </h1>
+      </h1>
+      <% end %> 
 
     <div>
       <a href="/events">Go back</a>
     </div>
 
-     <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
+    <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
       <div>
         <a href="/delete_event/<%= @the_event.id %>">Delete event</a>
       </div>
     <% end %>
-    
+
     <table>
       <tr>
         <th>Title</th>
@@ -63,16 +67,16 @@
       <p>Current funding: <%= @funds_raised %></p>
 
       <% if @current_user != nil  %>
-      <p>Your funding: <%= @your_funds_raised %></p>
+        <p>Your funding: <%= @your_funds_raised %></p>
       <% end  %>
 
       <% if @current_user != nil %>
         <h3>Donate</h3>
         <form action="/insert_donation" method="post">
-          
+
           <input type="hidden" name="query_event_id" value="<%= @the_event.id %>">
           <input type="hidden" name="query_donator_id" value="<%= @current_user.id %>">
-          
+
           <label for="donation_amount">Amount:</label>
           <input type="number" id="query_donation_amount" name="query_donation_amount" min="1" step="any">
 
@@ -81,122 +85,119 @@
       <% end %>
     </div>
 
-     <div>
-  <div>
-    
-  <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
-    
     <div>
-    <h2>
-      Edit event
-    </h2>
-    <p><i>Note: If you need to edit the players / teams involved in this event, please delete the event and create a new one.</i></p>
-    </div>
-
-<div>
-    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
       <div>
-        <label for="title_box">
-          Title
-        </label>
 
-        <input type="text" id="title_box" name="query_title" value="<%= @the_event.title %>">
-      </div>
+        <% if@current_user&.admin? || @current_user != nil && @current_user.id == @the_event.creator_id %>
 
-      <div>
-        <label for="description_box">
-          Description
-        </label>
+          <div>
+            <h2>
+              Edit event
+            </h2>
+            <p><i>Note: If you need to edit the players / teams involved in this event, please delete the event and create a new one.</i></p>
+          </div>
 
-        <textarea id="description_box" name="query_description"><%= @the_event.description %></textarea>
-      </div>
+          <div>
+            <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+              <div>
+                <label for="title_box">
+                  Title
+                </label>
 
-      <div>
-        <label for="funding_target_box">
-          Funding target
-        </label>
+                <input type="text" id="title_box" name="query_title" value="<%= @the_event.title %>">
+              </div>
 
-        <input type="text" id="funding_target_box" name="query_funding_target" value="<%= @the_event.funding_target %>">
-      </div>
+              <div>
+                <label for="description_box">
+                  Description
+                </label>
 
-      <div>
-        <label for="date_target_box">
-          Date target
-        </label>
+                <textarea id="description_box" name="query_description"><%= @the_event.description %></textarea>
+              </div>
 
-        <input type="date" id="date_target_box" name="query_date_target" value="<%= @the_event.date_target %>">
-      </div>
+              <div>
+                <label for="funding_target_box">
+                  Funding target
+                </label>
 
-      <div>
-        <label for="date_deadline_box">
-          Date deadline
-        </label>
+                <input type="text" id="funding_target_box" name="query_funding_target" value="<%= @the_event.funding_target %>">
+              </div>
 
-        <input type="date" id="date_deadline_box" name="query_date_deadline" value="<%= @the_event.date_deadline %>">
-      </div>
+              <div>
+                <label for="date_target_box">
+                  Date target
+                </label>
 
-      <div>
-        <input type="hidden" id="creator_id_box" name="query_creator_id" value="<%= @the_event.creator_id %>">
-      </div>
+                <input type="date" id="date_target_box" name="query_date_target" value="<%= @the_event.date_target %>">
+              </div>
 
-      <div>
-        <label for="game_id_box">
-          Game
-        </label>
+              <div>
+                <label for="date_deadline_box">
+                  Date deadline
+                </label>
 
-        <select name="query_game_id" id="game_id_box">
-          <% @list_of_games.each do |a_game| %>
-            <option value="<%= a_game.id %>" <%= 'selected' if @the_event.game_id == a_game.id %>>
+                <input type="date" id="date_deadline_box" name="query_date_deadline" value="<%= @the_event.date_deadline %>">
+              </div>
+
+              <div>
+                <input type="hidden" id="creator_id_box" name="query_creator_id" value="<%= @the_event.creator_id %>">
+              </div>
+
+              <div>
+                <label for="game_id_box">
+                  Game
+                </label>
+
+                <select name="query_game_id" id="game_id_box">
+                  <% @list_of_games.each do |a_game| %>
+                    <option value="<%= a_game.id %>" <%= 'selected' if @the_event.game_id == a_game.id %>>
               <%= a_game.title %>
             </option>
-          <% end %>
-        </select>
-      </div>
+                    <% end %>
+                  </select>
+                </div>
 
+                <div>
+                  <label for="watch_details_box">
+                    Watch details
+                  </label>
 
-      <div>
-        <label for="watch_details_box">
-          Watch details
-        </label>
+                  <textarea id="watch_details_box" name="query_watch_details"><%= @the_event.watch_details %></textarea>
+                </div>
 
-        <textarea id="watch_details_box" name="query_watch_details"><%= @the_event.watch_details %></textarea>
-      </div>
+                <% if @current_user&.admin? %>
+                  <div>
+                    <label for="battle_report_box">
+                      Battle report
+                    </label>
 
-      <% if @current_user&.admin? %>
-      <div>
-        <label for="battle_report_box">
-          Battle report
-        </label>
+                    <textarea id="battle_report_box" name="query_battle_report"><%= @the_event.battle_report %></textarea>
+                  </div>
 
-        <textarea id="battle_report_box" name="query_battle_report"><%= @the_event.battle_report %></textarea>
-      </div>
+                  <div>
+                    <label for="winning_team_box">
+                      Winning Team
+                    </label>
 
-<div>
-  <label for="winning_team_box">
-    Winning Team
-  </label>
-
-  <select name="query_winning_team_id" id="winning_team_box">
-    <option value=""></option>
-    <% (1..2).each do |team| %>
-      <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team.to_s %>>
-        Team <%= team %>: <%= @the_event.winning_team_nicks[team.to_s].join(", ") %>
+                    <select name="query_winning_team_id" id="winning_team_box">
+                      <option value=""></option>
+                      <% (1..2).each do |team| %>
+                        <option value="<%= team %>" <%= 'selected' if @the_event.winning_team == team %>>
+        Team <%= team %>: <%= EventsPlayer.where(event_id: @the_event.id, team: team).map { |ep| Player.find(ep.player_id).nickname }.join(", ") %>
       </option>
-    <% end %>
-  </select>
-</div>
+                        <% end %>
+                      </select>
+                    </div>
 
+                  <% end %>
 
-      <% end %>
+                  <button>
+                    Update event
+                  </button>
+                </form>
+              <%end%>
+            </div>
+          </div>
 
-      <button>
-        Update event
-      </button>
-    </form>
-    <%end%>
-  </div>
-</div>
-
-
-  </div>
-</div>
+        </div>
+      </div>
