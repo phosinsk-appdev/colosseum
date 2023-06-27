@@ -25,7 +25,7 @@ class DonationsController < ApplicationController
 
     if the_donation.valid?
       the_donation.save
-      redirect_to("/events/#{params.fetch("query_event_id")}", { :notice => "Donation created successfully - thank you for your support!"} )
+      redirect_to("/events/#{params.fetch("query_event_id")}", { :notice => "Donation successfully processed - thank you for your support!"} )
     else
       redirect_to("/donations", { :alert => the_donation.errors.full_messages.to_sentence })
     end

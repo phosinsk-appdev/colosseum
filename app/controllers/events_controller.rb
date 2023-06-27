@@ -30,8 +30,9 @@ class EventsController < ApplicationController
       @list_of_events = Event.nearly_funded.order({:date_target => :asc})
       @table_header = "So Close! Let's Make These Events Happen!"
     elsif filter == "my_events" && @current_user
-      @list_of_created_events = @current_user.events.where.not(:status => "complete")
+      @list_of_created_events = @current_user.events.order({:date_target => :asc})
       @list_of_supported_events = @current_user.donations.map(&:event).compact.uniq.select { |event| event.status != "complete" }
+      @list_of_supported_events = @list_of_supported_events.sort_by { |event| event.date_target }
       @table_header = "My Events"
     else
       @list_of_events = Event.where.not(:status => "complete").order({ :date_target => :asc})
