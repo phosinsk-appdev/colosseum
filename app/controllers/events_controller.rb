@@ -21,14 +21,18 @@ class EventsController < ApplicationController
     filter = params[:filter]
 
     if filter == 'funded_upcoming'
-      @list_of_events = Event.where(:status => "funded").order({:created_at => :desc})
+      @list_of_events = Event.where(:status => "funded").order({:date_target => :asc})
       @table_header = "Upcoming Events"
     elsif filter == 'past'
-      @list_of_events = Event.where(:status => "complete").order({:created_at => :desc})
+      @list_of_events = Event.where(:status => "complete").order({:date_target => :asc})
       @table_header = "Past Events"
     elsif filter == 'so_close'
-      @list_of_events = Event.nearly_funded.order({:created_at => :desc})
+      @list_of_events = Event.nearly_funded.order({:date_target => :asc})
       @table_header = "So Close! Let's Make These Events Happen!"
+    elsif filter == "my_events" && @current_user
+      @list_of_created_events = @current_user.events.where.not(:status => "complete")
+      @list_of_supported_events = @current_user.donations.map(&:event).compact.uniq.select { |event| event.status != "complete" }
+      @table_header = "My Events"
     else
       @list_of_events = Event.where.not(:status => "complete").order({ :date_target => :asc})
       @table_header = "All Events"
@@ -77,6 +81,21 @@ class EventsController < ApplicationController
     end
 
     @teams = [1,2]
+
+      # get teams 1 and 2 (nicknames)
+      # Fetch players from Team 1
+      @team_1_players = Player.joins(:events_players).where(events_players: { event_id: the_id, team: 1 }).pluck(:nickname).join(', ')
+
+      # Fetch players from Team 2
+      @team_2_players = Player.joins(:events_players).where(events_players: { event_id: the_id, team: 2 }).pluck(:nickname).join(', ')
+
+       # Get winning and losing teams
+       winning_team_ids = @the_event.events_players.where(team: @the_event.winning_team).map(&:player_id)
+       losing_team_ids = @the_event.events_players.where.not(team: @the_event.winning_team).map(&:player_id)
+        
+      # Get player nicknames for winning and losing teams
+      @winning_team_nicknames = Player.where(id: winning_team_ids).map(&:nickname).join(', ')
+      @losing_team_nicknames = Player.where(id: losing_team_ids).map(&:nickname).join(', ')
 
     render({ :template => "events/show.html.erb" })
   end

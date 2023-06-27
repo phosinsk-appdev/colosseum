@@ -40,12 +40,16 @@
         <td><%= @game.title %></td>
       </tr>
       <tr>
-        <th>Watch details</th>
-        <td><%= @the_event.watch_details %></td>
+        <th>Team 1</th>
+        <td><%= @team_1_players %></td>
       </tr>
       <tr>
-        <th>Created</th>
-        <td><%= time_ago_in_words(@the_event.created_at) %> ago</td>
+        <th>Team 2</th>
+        <td><%= @team_2_players %></td>
+      </tr>
+      <tr>
+        <th>Watch details</th>
+        <td><%= @the_event.watch_details %></td>
       </tr>
       <% if @the_event.status == "complete" %>
         <tr>
@@ -54,7 +58,11 @@
         </tr>
         <tr>
           <th>Winning team</th>
-          <td><%= @the_event.winning_team %></td>
+          <td><%= @winning_team_nicknames %></td>
+        </tr>
+        <tr>
+          <th>Losing team</th>
+          <td><%= @losing_team_nicknames %></td>
         </tr>
       <% end %>
     </table>

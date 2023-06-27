@@ -82,8 +82,11 @@
 <div> 
   <div style="float: left;"> 
       <a href="/events?filter=all">All Events</a>  |  
+      <% if @current_user != nil %>
+      <a href="/events?filter=my_events">My Events</a>  |  
+      <% end %>
       <a href="/events?filter=funded_upcoming">Upcoming Events</a>  |  
-      <a href="/events?filter=so_close">So Close! Events</a>  | 
+      <a href="/events?filter=so_close">Nearly Funded Events</a>  | 
       <a href="/events?filter=past">Past Events</a>
   </div>
 
@@ -117,77 +120,98 @@
 </div>
 
 
-<hr>
 <div>
   <div>
-    <table border="1">
-      <tr>
+    <% if params[:filter] == 'my_events' && @current_user %>
 
-        <th>
-          Title
-        </th>
+      <% if @list_of_created_events.any? %>
+        <h3>Events You Created</h3>
+        <table border="1">
+          <tr>
+            <th>Title</th>
+            <th>Game</th>
+            <th>Description</th>
+            <th>Funding Goal</th>
+            <th>Funds Raised</th>
+            <th>Target Date</th>
+            <th>Show Details</th>
+          </tr>
 
-        <th>
-          Game
-        </th>
-
-        <th>
-          Description
-        </th>
-
-        <th>
-          Funding Goal
-        </th>
-
-        <th>
-          Funds Raised
-        </th>
-
-        <th>
-          Target Date
-        </th>
-
-        <th>
-        Show Details
-        </th>
-      </tr>
-
-      <% @list_of_events.each do |an_event| %>
-      <tr>
-
-        <td>
-          <%= an_event.title %>
-        </td>
-
-        <td>
-          <%= an_event.game.title %>
-        </td>
-
-        <td>
-          <%= an_event.description %>
-        </td>
-
-        <td>
-          <%= an_event.funding_target %>
-        </td>
-
-        <td>
-          <%= an_event.donations.sum(:donation) %>
-        </td>
-
-        <td>
-          <%= an_event.date_target.strftime('%m/%d/%y') %>
-        </td>
-
-        <td>
-          <a href="/events/<%= an_event.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          <% @list_of_created_events.each do |an_event| %>
+            <tr>
+              <td><%= an_event.title %></td>
+              <td><%= an_event.game.title %></td>
+              <td><%= an_event.description %></td>
+              <td><%= an_event.funding_target %></td>
+              <td><%= an_event.donations.sum(:donation) %></td>
+              <td><%= an_event.date_target.strftime('%m/%d/%y') %></td>
+              <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <p>You have not created any events.</p>
       <% end %>
-    </table>
+
+      <% if @list_of_supported_events.any? %>
+        <h3>Events You're Supporting</h3>
+        <table border="1">
+          <tr>
+            <th>Title</th>
+            <th>Game</th>
+            <th>Description</th>
+            <th>Funding Goal</th>
+            <th>Funds Raised</th>
+            <th>Target Date</th>
+            <th>Show Details</th>
+          </tr>
+
+          <% @list_of_supported_events.each do |an_event| %>
+            <tr>
+              <td><%= an_event.title %></td>
+              <td><%= an_event.game.title %></td>
+              <td><%= an_event.description %></td>
+              <td><%= an_event.funding_target %></td>
+              <td><%= an_event.donations.sum(:donation) %></td>
+              <td><%= an_event.date_target.strftime('%m/%d/%y') %></td>
+              <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <p>You are not supporting any events.</p>
+      <% end %>
+
+    <% else %>
+
+      <table border="1">
+        <tr>
+          <th>Title</th>
+          <th>Game</th>
+          <th>Description</th>
+          <th>Funding Goal</th>
+          <th>Funds Raised</th>
+          <th>Target Date</th>
+          <th>Show Details</th>
+        </tr>
+
+        <% @list_of_events.each do |an_event| %>
+          <tr>
+            <td><%= an_event.title %></td>
+            <td><%= an_event.game.title %></td>
+            <td><%= an_event.description %></td>
+            <td><%= an_event.funding_target %></td>
+            <td><%= an_event.donations.sum(:donation) %></td>
+            <td><%= an_event.date_target.strftime('%m/%d/%y') %></td>
+            <td><a href="/events/<%= an_event.id %>">Show details</a></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>
+
+<hr>
+
 
 <hr>
