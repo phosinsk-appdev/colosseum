@@ -156,6 +156,7 @@ class EventsController < ApplicationController
     the_id = params.fetch("path_id")
     @event = Event.where({ :id => the_id }).at(0)
     @min_funding_target = @event.players.maximum(:event_minimum)
+    @min_funding_player = @event.players.find_by(event_minimum: @min_funding_target)
 
     @event.funding_target = params[:query_funding_target]
 
@@ -167,7 +168,7 @@ class EventsController < ApplicationController
         redirect_to("/events/#{the_id}/set_funding_target", { :alert => "Funding target cannot exceed $100,000."} )
       end
     else
-      redirect_to("/events/#{the_id}/set_funding_target", { :notice => "Funding target not updated - below minimum given players involved (#{@min_funding_target})"} )
+      redirect_to("/events/#{the_id}/set_funding_target", { :alert => "Funding target not updated - below minimum given players involved (#{@min_funding_player.nickname}'s event minimum is #{@min_funding_target})."} )
     end
   end
 

@@ -49,7 +49,7 @@
       </tr>
       <tr>
         <th>Watch details</th>
-        <td><%= @the_event.watch_details %></td>
+        <td><a href="<%= @the_event.watch_details %>" target="_blank"> <%= @the_event.watch_details %> </a></td>
       </tr>
       <% if @the_event.status == "complete" %>
         <tr>
